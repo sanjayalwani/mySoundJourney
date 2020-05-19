@@ -1,0 +1,31 @@
+.main-footer
+{
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+	width: auto;
+	display: flex;
+	justify-content: space-between;
+    border-top: solid 3px black;
+    background-color: white;
+	color: black;
+	height: 2em;
+	}
+	.main-footer-author
+	{
+        line-height: 2em;
+		padding: 1px 5px;
+		font-weight: 600;
+	}
+	.main-footer-nav
+	{
+		line-height: 2em;
+		padding: 1px 5px;
+        }
+        .main-footer-nav span{
+            padding: 1px 5px;
+        }
+
+	
