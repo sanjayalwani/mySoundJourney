@@ -2,4 +2,5 @@
 .DS_Store
 APIExploration
 *.docx
+*.txt
 frontend/node_modules/
