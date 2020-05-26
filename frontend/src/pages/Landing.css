@@ -8,7 +8,10 @@
     text-align: center;
     color: white;
     padding: 3em;
-}  
+  }
+  .auth-container__description{
+    margin: 2em 0;
+  }  
   .auth-container__button{
       padding: 0.9em;
       font-family: Circular;
@@ -26,7 +29,7 @@
   .auth-container{
   padding: 2em;
     }
-    .auth-container h2{
+    .auth-container__description{
       font-size: 1.4em;
     }
   

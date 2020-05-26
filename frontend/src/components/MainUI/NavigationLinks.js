@@ -7,14 +7,14 @@ const NavigationLinks = props => {
     return  (
         <ul className="navigation-links">
             <li>
-                <NavLink to="/">JOURNEY</NavLink>
+                <NavLink to="/journey">JOURNEY</NavLink>
             </li>
-            <li>
+            {/*<li>
                 <NavLink to="/top">TOP 50</NavLink>
             </li>
             <li>
                 <NavLink to="/saved">SAVED</NavLink>
-            </li>
+            </li>*/}
         </ul>
     );
 }
