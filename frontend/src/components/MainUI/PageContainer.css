@@ -1,0 +1,9 @@
+.page-container{
+    margin: 1em auto;
+    background-color: gainsboro;
+    border-radius: 1em;
+    box-shadow: 2px 2px gray;
+    text-align: center;
+    width: 80%;
+    padding: 1em;
+    }
