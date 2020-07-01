@@ -5,12 +5,14 @@ const cookieParser = require('cookie-parser');
 const env = require('dotenv');
 
 //Environment variables for local testing To Be Removed when pushing to Heroku
-env.config();
-if(env.error) throw env.error;
+if(!process.env.NODE_ENV){
+  env.config();
+  if(env.error) throw env.error;
+}
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;// Your client id
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
-const REDIRECT_URI = 'http://localhost:8888/auth/callback'; // Your redirect uri
+const REDIRECT_URI = process.env.REDIRECT_URI; // Your redirect uri
 const stateKey = 'spotify_auth_state'; //This names the cookie for reference
 
 const router = Router();
@@ -72,13 +74,13 @@ router.get('/callback', function(req, res) {
         res.cookie('acc_tok', access_token);
         // Now we send our tokens to an endpoint that our React app handles
         //MUST CHANGE TO USE JAVASCRIPT WEB TOKEN FOR SECURITY
-        res.redirect('http://localhost:8888/journey' /*+
+        res.redirect('/journey' /*+
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           })*/);
       } else {
-        res.redirect('http://localhost:8888/error?' +
+        res.redirect('/error?' +
           querystring.stringify({
             error: 'invalid_token'
           }));
