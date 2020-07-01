@@ -2,10 +2,12 @@ const { Router } = require('express');
 const request = require('request'); // "Request" library
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
-const env = require('dotenv');
+
 
 //Environment variables for local testing To Be Removed when pushing to Heroku
-if(!process.env.NODE_ENV){
+if(process.env.NODE_ENV!="production"){
+  console.log(`Not in production: in ${process.env.NODE_ENV}`);
+  const env = require('dotenv');
   env.config();
   if(env.error) throw env.error;
 }
