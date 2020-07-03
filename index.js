@@ -9,7 +9,7 @@ const express = require('express'); // Express web server framework
 const path = require('path');
 const authRouter = require('./auth');
 
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
