@@ -6,7 +6,6 @@ import {getJourneyData, getUsername} from '../controllers/spotifyShaper';
 //import SpotifyWebApi from '../util/spotify-web-api';
 //import { response } from 'express';
 //import axios from 'axios';
-import {recentTracks as DUMMY_DATA} from '../components/Journey/RecentTrack';
 
 const Journey = props => {
     //let auth = useContext(AuthContext);
@@ -62,12 +61,9 @@ const Journey = props => {
         setTimeout(()=>fetchName(),100);
     
     */
-   
     return (
         <PageContainer>
-            <h1>Overview {username? `for ${username}` : ''}</h1>
-            {data && data.length === 0 && <span> Loading ••• </span>}
-            {/*data && data.length > 0 && <JourneyStats recent_tracks={data}/>*/}
+            <p>Welcome {username? username: "Loading"}</p>
             <h2> Listening History </h2>
             {data && data.length === 0 && <span> Loading ••• </span>}
             {data && data.length > 0 && <JourneyTable recent_tracks={data}/>}

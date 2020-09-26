@@ -14,6 +14,30 @@
 		font-size: 2em;
 		font-weight: 600;
 	}
+	.navigation-logout
+	{
+		list-style: none;
+		margin: auto 5px;
+		text-decoration: none;
+		color: white;
+		padding: 0.5em;
+		line-height: 1em;
+		border-radius: 1em;
+		font-weight: 600;
+	}
+	.navigation-logout:hover
+	{
+		text-decoration: underline;
+		text-decoration-color: #1db954;
+		text-decoration-thickness: 0.2em;
+	}
+	.navigation-logout:active
+	{
+		text-decoration: underline;
+		text-decoration-color: #b92d54;
+		text-decoration-thickness: 0.3em;
+	}
+	
 	.navigation-shoutout
 	{
 		line-height: 3em;

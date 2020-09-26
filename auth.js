@@ -6,16 +6,17 @@ const cookieParser = require('cookie-parser');
 
 //Environment variables for local testing To Be Removed when pushing to Heroku
 if(process.env.NODE_ENV!="production"){
-  console.log(`Not in production: in ${process.env.NODE_ENV}`);
+  console.log(`Not in production: in ${process.env.NODE_ENV || 'local dev'}`);
   const env = require('dotenv');
   env.config();
   if(env.error) throw env.error;
 }
 
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;// Your client id
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
-const REDIRECT_URI = process.env.REDIRECT_URI; // Your redirect uri
-const stateKey = 'spotify_auth_state'; //This names the cookie for reference
+const CLIENT_ID     = process.env.SPOTIFY_CLIENT_ID;      // Your client id
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;  // Your secret
+const REDIRECT_URI  = process.env.REDIRECT_URI;           // Your redirect uri
+const stateKey      = 'spotify_auth_state';               // This names the cookie for reference
+const accessKey     = 'acc_tok';                          // Cookie key - Cookey
 
 const router = Router();
 
@@ -23,7 +24,11 @@ const router = Router();
 router.use(cookieParser());
 
 router.get('/login', function(req, res) {
-
+  console.log("Login requested")
+  if(req.query.hasOwnProperty('error')){
+    res.clearCookie(stateKey);
+    //The client will do the notification logic (if any)
+  }
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
@@ -38,6 +43,12 @@ router.get('/login', function(req, res) {
       state: state
     }));
 });
+
+router.get('/logout', function(req, res) {
+  console.log("Cookie cleared")
+  res.clearCookie(accessKey);
+  res.redirect('/');
+})
 
 router.get('/callback', function(req, res) {
 
@@ -67,21 +78,23 @@ router.get('/callback', function(req, res) {
       },
       json: true
     };
-
+    console.log("Posting now")
     request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
 
         let access_token = body.access_token;
-        let refresh_token = body.refresh_token;
-        res.cookie('acc_tok', access_token);
+        let refresh_token = body.refresh_token;                                     //We don't use this, yet
+        res.cookie(accessKey, access_token, { maxAge: 3600000});   //1 hour token
+        console.log("Granted cookie")
         // Now we send our tokens to an endpoint that our React app handles
-        //MUST CHANGE TO USE JAVASCRIPT WEB TOKEN FOR SECURITY
+        //MUST CHANGE TO USE JAVASCRIPT WEB TOKEN FOR SECURITY, perhaps
         res.redirect('/journey' /*+
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           })*/);
       } else {
+        console.log("There was an error")
         res.redirect('/error?' +
           querystring.stringify({
             error: 'invalid_token'

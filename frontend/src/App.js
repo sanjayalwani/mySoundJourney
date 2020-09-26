@@ -6,6 +6,7 @@ import Navigation from './components/MainUI/Navigation';
 import Landing from './pages/Landing';
 import Footer from './components/MainUI/Footer';
 import Journey from './pages/Journey';
+import Overview from './pages/Overview';
 
 //Add Oauth here with contextual routing based on authorization ( has access token )
 //If !auth then redirect to "/auth" which contains landing page
@@ -18,30 +19,24 @@ import Journey from './pages/Journey';
 //  return new URLSearchParams(useLocation().search);
 //}
 var isLoggedIn = false;
+console.log("isloggedin reinit")
 var access_token = "";
 function App() {
-  useEffect(() => {
-  if(!isLoggedIn && document.cookie.includes("acc_tok")){
-    access_token = document.cookie
-      .split(';')
-      .find((row) => row.startsWith('acc_tok'))
-      .split('=')[1];
-    isLoggedIn = true;
-  }
-  console.log("Mounted");
-  return function cleanup(){
-    console.log("Cleaning up");
-    document.cookie = encodeURIComponent('acc_tok=;');
-  }
-},[])
+                                                                //Cookies expire after 1 hour
 
-  if(!isLoggedIn && document.cookie.includes("acc_tok")){
-    access_token = document.cookie
+  if(document.cookie.includes("acc_tok")){                      //If the cookie exists it hasn't expired
+    access_token = document.cookie                                //  So we're 'logged in'
       .split(';')
       .find((row) => row.startsWith('acc_tok'))
       .split('=')[1];
     isLoggedIn = true;
+    console.log("acc_tok exists");
+  } else {                                                      //If cookie is gone, hopefully when expired
+    isLoggedIn = false;                                         //  We're not 'logged in'
+    console.log("acc_tok not found in cookie: " + document.cookie);
   }
+
+
   /*
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState('');
@@ -62,6 +57,7 @@ function App() {
   let routes;
 
   if( !isLoggedIn ){
+    console.log("Checking the isLoggedIn variable");
     routes = (
       <Switch>
         <Route path="/" exact>
@@ -71,11 +67,15 @@ function App() {
       </Switch>
     );
   }
-  else{
+  else {
+    console.log("Passed the isLoggedIn variable");
     routes = (
       <Switch>
           <Route path="/journey" >
             <Journey />
+          </Route>
+          <Route path="/overview" >
+            <Overview />
           </Route>
           <Route path="/top/tracks" >
             <Journey />
@@ -84,13 +84,13 @@ function App() {
             <Journey />
           </Route>
           <Redirect to="/journey" />
-        </Switch>
+      </Switch>
     );
   }
 
   return (
       <Router>
-        <Navigation />
+        <Navigation isLoggedIn={isLoggedIn}/>
         <main>
           {routes}
         </main>

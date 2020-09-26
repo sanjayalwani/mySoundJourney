@@ -7,7 +7,7 @@ import './JourneyTable.css';
 
 //Data fetch cycle to occur on mounting with useEffect() hook
 //we may move this up a layer as journey might need to pass the object to an overview panel too..
-import {recentTracks as DUMMY_DATA} from './RecentTrack';
+
 
 
 const JourneyTable = props => {
@@ -81,7 +81,7 @@ const JourneyTable = props => {
             </table>
         )
     } else {*/
-
+    console.log(props.recent_tracks);
     let final_tracks = props.recent_tracks;
     console.log("Tracks object\n");
     console.log(final_tracks[0]);
@@ -99,7 +99,7 @@ const JourneyTable = props => {
                 </tr>
             </thead>
             <tbody>
-                {final_tracks?final_tracks.map( (trackObj, index) => <JourneyRow trackObject={trackObj} key={index} />):<tr><td>sorry</td></tr>}
+                {final_tracks?final_tracks.map( (trackObj, index) => <JourneyRow trackObject={trackObj} key={index} />):<tr><td>nothing here</td></tr>}
             </tbody>
         </table>
     );
