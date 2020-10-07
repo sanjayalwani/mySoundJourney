@@ -1,1 +1,2 @@
-@import "~react-vis/dist/style";
+@import "../../../node_modules/react-vis/dist/style.css";
+@import "../../../node_modules/chart.js/dist/Chart.min.css"

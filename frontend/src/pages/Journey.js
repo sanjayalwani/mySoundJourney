@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PageContainer from '../components/MainUI/PageContainer';
 import JourneyTable from '../components/Journey/JourneyTable';
+import JourneyStats from '../components/Journey/JourneyStats'
 import { AuthContext } from '../util/auth-context';
 import {getJourneyData, getUsername} from '../controllers/spotifyShaper';
 //import SpotifyWebApi from '../util/spotify-web-api';
 //import { response } from 'express';
 //import axios from 'axios';
-import {recentTracks as DUMMY_DATA} from '../components/Journey/RecentTrack';
+import {recentTracks as DUMMY_DATA, recentTracks} from '../components/Journey/RecentTrack';
 
 const Journey = props => {
     //let auth = useContext(AuthContext);
@@ -20,9 +21,11 @@ const Journey = props => {
     
     let init = async () => {
         //auth.access_token
+        /* TRIAL 1 REMOVE
         let u = await getUsername(access_token);
         setUsername(u);
-        let d = await getJourneyData(access_token);
+        let d = await getJourneyData(access_token);*/
+        let d = recentTracks;
         setData(d);
     }
     useEffect(()=>init(),[]);
@@ -67,7 +70,7 @@ const Journey = props => {
         <PageContainer>
             <h1>Overview {username? `for ${username}` : ''}</h1>
             {data && data.length === 0 && <span> Loading ••• </span>}
-            {/*data && data.length > 0 && <JourneyStats recent_tracks={data}/>*/}
+            {data && data.length > 0 && <JourneyStats recent_tracks={data}/>}
             <h2> Listening History </h2>
             {data && data.length === 0 && <span> Loading ••• </span>}
             {data && data.length > 0 && <JourneyTable recent_tracks={data}/>}

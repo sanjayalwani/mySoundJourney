@@ -55,7 +55,7 @@ function App() {
   }, []);
   */
   let routes;
-
+  isLoggedIn=true;  //TRIAL 1 REMOVE
   if( !isLoggedIn ){
     console.log("Checking the isLoggedIn variable");
     routes = (
