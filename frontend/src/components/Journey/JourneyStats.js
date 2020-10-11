@@ -48,7 +48,7 @@ const JourneyStats = props => {
                 backgroundColor: '#B91D82',
                 pointRadius: 1,
                 pointHitRadius: 15,
-                pointStyle: images,
+                pointStyle: images.slice(partitions[currentSession][0], partitions[currentSession][1]),
                 lineTension: 0,
             }]
         };
@@ -120,7 +120,7 @@ const JourneyStats = props => {
                 backgroundColor: '#1db954',
                 pointRadius: 1,
                 pointHitRadius: 15,
-                pointStyle: images,
+                pointStyle: images.slice(partitions[currentSession][0], partitions[currentSession][1]),
                 lineTension: 0,
             }]
         };
