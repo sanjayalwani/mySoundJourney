@@ -39,7 +39,7 @@ export const getJourneyData = async (access_token) =>
     let recentsData;
     let recentsFeatures;
     
-    console.log("Getting journey data try ");
+    //console.log("Getting journey data try ");
 
     await fetchRecents()
         .then((res) => {
@@ -57,7 +57,7 @@ export const getJourneyData = async (access_token) =>
         .then(async (track_ids) => {
             recentsFeatures = await getTrackFeatures(track_ids)
                 .then(feat => {
-                    console.log(feat);
+                    //console.log(feat);
                     if(!recentsData) throw Error("No response 2"+recentsData);
                     else{
                         finalData = recentsData.map( (obj, idx) => {

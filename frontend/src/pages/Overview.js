@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PageContainer from '../components/MainUI/PageContainer';
 import JourneyTable from '../components/Journey/JourneyTable';
-import { AuthContext } from '../util/auth-context';
+//import { AuthContext } from '../util/auth-context';
 import {getJourneyData, getUsername} from '../controllers/spotifyShaper';
 //import SpotifyWebApi from '../util/spotify-web-api';
 //import { response } from 'express';
@@ -9,7 +9,7 @@ import {getJourneyData, getUsername} from '../controllers/spotifyShaper';
 
 const Journey = props => {
     //let auth = useContext(AuthContext);
-    console.log("Cookie => "+document.cookie);
+    //console.log("Cookie => "+document.cookie);
     let access_token;
     if(document.cookie.includes("acc_tok")){
         access_token = document.cookie.split('=')[1];

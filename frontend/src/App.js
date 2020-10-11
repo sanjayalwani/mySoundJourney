@@ -19,7 +19,7 @@ import Overview from './pages/Overview';
 //  return new URLSearchParams(useLocation().search);
 //}
 var isLoggedIn = false;
-console.log("isloggedin reinit")
+//console.log("isloggedin reinit")
 var access_token = "";
 function App() {
                                                                 //Cookies expire after 1 hour
@@ -30,34 +30,17 @@ function App() {
       .find((row) => row.startsWith('acc_tok'))
       .split('=')[1];
     isLoggedIn = true;
-    console.log("acc_tok exists");
+    //console.log("acc_tok exists");
   } else {                                                      //If cookie is gone, hopefully when expired
     isLoggedIn = false;                                         //  We're not 'logged in'
-    console.log("acc_tok not found in cookie: " + document.cookie);
+    //console.log("acc_tok not found in cookie: " + document.cookie);
   }
 
 
-  /*
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState('');
-  const [refreshToken, setRefreshToken] = useState('');
-
-  const login = useCallback((access_t, refresh_t) => {
-    setIsLoggedIn(true);
-    setAccessToken(access_t);
-    setRefreshToken(refresh_t);
-  }, []);
-  
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-    setAccessToken('');
-    setRefreshToken('');
-  }, []);
-  */
   let routes;
-  isLoggedIn=true;  //TRIAL 1 REMOVE
+  //isLoggedIn=true;  //TRIAL 1 REMOVE
   if( !isLoggedIn ){
-    console.log("Checking the isLoggedIn variable");
+    //console.log("Checking the isLoggedIn variable");
     routes = (
       <Switch>
         <Route path="/" exact>
@@ -68,7 +51,7 @@ function App() {
     );
   }
   else {
-    console.log("Passed the isLoggedIn variable");
+    //console.log("Passed the isLoggedIn variable");
     routes = (
       <Switch>
           <Route path="/journey" >

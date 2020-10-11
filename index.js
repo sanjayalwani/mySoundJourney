@@ -2,7 +2,7 @@
 *MySoundJourney
 *Sanjay Alwani 2020
 *
-*Backend heavily adopted https://github.com/spotify/web-api-auth-examples/tree/master/authorization_code
+*Backend adopted from https://github.com/spotify/web-api-auth-examples/tree/master/authorization_code
 */
 
 const express = require('express'); // Express web server framework

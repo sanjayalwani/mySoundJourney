@@ -81,10 +81,10 @@ const JourneyTable = props => {
             </table>
         )
     } else {*/
-    console.log(props.recent_tracks);
+    //console.log(props.recent_tracks);
     let final_tracks = props.recent_tracks;
-    console.log("Tracks object\n");
-    console.log(final_tracks[0]);
+    //console.log("Tracks object\n");
+    //console.log(final_tracks[0]);
     return (
         <table className="journey-table">
             <thead>
