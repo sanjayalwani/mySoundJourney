@@ -1,2 +1,42 @@
-@import "../../../node_modules/react-vis/dist/style.css";
-@import "../../../node_modules/chart.js/dist/Chart.min.css"
+@import "../../../node_modules/chart.js/dist/Chart.min.css";
+
+.session-title{
+    display: block;
+    margin: 5px;
+}
+.session-control{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    }
+    .session-control-button{
+        padding: 5px;
+        width: 10em;
+        margin: 1px;
+        background-color: #111;
+        color: white;
+        box-shadow: none;
+        border-color: none;
+        border-style: none;
+        border: 0.5px solid white;
+        font-size: 1em;
+        font-weight: 700;
+    }
+    .session-control-button:hover{
+        color: #1db954;
+    }
+    .session-control-button:active{
+        color: #1db954;
+    }
+    .session-control-button:disabled{
+        color: #666;
+    }
+    .prev-button{
+        border-top-left-radius: 1em;
+        border-bottom-left-radius: 1em;
+    }
+    .next-button{
+        border-top-right-radius: 1em;
+        border-bottom-right-radius: 1em;
+    }

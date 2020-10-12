@@ -20,7 +20,14 @@ const JourneyStats = props => {
     const happyChart = useRef(undefined);
     let images = new Array(50);
     props.recent_tracks.map((val, idx) => {
-        images[idx] = new Image(30, 30);
+        console.log(window.innerWidth);
+        if(window.innerWidth>1000){
+            images[idx] = new Image(30, 30);
+        } else if(window.innerWidth>700){
+            images[idx] = new Image(21, 21);
+        } else {
+            images[idx] = new Image(12, 12);
+        }
         images[idx].src = val.track.album.images[2].url;
         images[idx].border = "solid 1px green;";
         images[idx].borderRadius = "50%";
@@ -182,32 +189,32 @@ const JourneyStats = props => {
         });
         
     });
-    //To implement:
-    //  Time gap partitioning where Date difference between tracks should ≈ runtime of track
-    //  This way we can group listening sessions and have more representative graphs
-    //  This does stretch the x (time) axis tho, so we should add interactive sliding/scrolling down time next!
-    //  Also add 'crosshairs' with track info as you hover over, that would be cool
+
     let sesh_start = time_labels[partitions[currentSession][1] -1];
-    let sesh_length = time_labels[partitions[currentSession][0]] - sesh_start;
+    let sesh_length = time_labels[partitions[currentSession][0]] - sesh_start + props.recent_tracks[partitions[currentSession][0]].track.duration_ms;
     sesh_length = `${(sesh_length>=3600000)? (Math.floor((sesh_length/60000)/60)+'h ') : ''}${Math.round((sesh_length/60000)%60)} min`
     let sesh_day = sesh_start.toDateString().slice(4,11);
-    let sesh_time = `${sesh_start.toLocaleTimeString('en-US').slice(0,4)} ${sesh_start.toLocaleTimeString('en-US').slice(8,10)}`;
+    let sesh_time_h = sesh_start.getHours();
+    let sesh_time_m = sesh_start.getMinutes();
+    sesh_time_m = (sesh_time_m>9)? sesh_time_m : `0${sesh_time_m}`;
+    let sesh_time = `${(sesh_time_h%12==0)? '12': (sesh_time_h%12)}:${sesh_time_m} ${((Math.floor(sesh_time_h/12))? 'PM' : 'AM')}`;
     return (
     <React.Fragment>
-        <span>
-            <button 
+        <span className="session-title"><b>{sesh_length}</b> session on <b>{sesh_day}</b> at <b>{sesh_time}</b></span>
+        <span className="session-control">
+            <button
+             className="session-control-button prev-button" 
              disabled={(currentSession===partitions.length-1)} 
              onClick={() => setCurrentSession(currentSession+1)}>
-                Previous
+                PREVIOUS
             </button>
-            {<span><b>{sesh_length}</b> session on <b>{sesh_day}</b> at <b>{sesh_time}</b></span>}
             <button 
+             className="session-control-button next-button" 
              disabled={(currentSession===0)} 
              onClick={() => setCurrentSession(currentSession-1)}>
-                Next
+                NEXT
             </button>
         </span>
-        <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css"></link>
 
         <h2>Energy levels</h2>
         <canvas id="energyChart" height="80px"></canvas>

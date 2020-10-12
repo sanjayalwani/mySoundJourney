@@ -29,7 +29,7 @@ const JourneyRow = props => {
         <td style={{fontSize: `${popToSize(track.popularity)}em`}}>{track.popularity}</td>
         <td style={{backgroundColor: `rgba(${percentColor(props.trackObject.energy)},30,${255-(percentColor(props.trackObject.energy))},0.6)`}}>{`${Math.round(props.trackObject.energy*10000)/100}%`}</td>
         <td style={{backgroundColor: `rgba(${percentColor(props.trackObject.valence)},${cosColor(props.trackObject.valence)},${255-percentColor(props.trackObject.valence)},0.6)`}}>{`${Math.round(props.trackObject.valence*10000)/100}%`}</td>
-        <td>{listen_date.toDateString().slice(4,11)} {listen_date.toLocaleTimeString('en-US')}</td>
+        <td className="journey-table-time">{listen_date.toDateString().slice(4,11)} {listen_date.toLocaleTimeString('en-US')}</td>
     </tr>
     );
 }

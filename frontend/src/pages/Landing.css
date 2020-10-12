@@ -24,6 +24,21 @@
       border: none;
   }
 
+.msj-features{
+  text-align: center;
+  }
+  .msj-features-list{
+    list-style: none;
+    text-align: left;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  li::before{
+    content: "> ";
+    color: #1db954;
+  }
+
 @media screen and (max-width: 500px){
 
   .auth-container{

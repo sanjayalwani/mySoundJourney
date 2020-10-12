@@ -9,8 +9,8 @@ const Footer = props => {
 				© 2020 Sanjay Alwani
 			</span>
 			<span className="main-footer-nav">
-				<span>About</span>
-				<span>Feedback</span>
+				<span style={{color: '#666'}}>About</span>
+				{/*<span>Feedback</span>*/}
 			</span>
 		</footer>
 	);
