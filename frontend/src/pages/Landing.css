@@ -22,12 +22,13 @@
       color: white;
       border-radius: 1.8em;
       border: none;
+      margin: 2em;
   }
 
 .msj-features{
   text-align: center;
   }
-  .msj-features-list{
+  .msj-features_list{
     list-style: none;
     text-align: left;
     width: fit-content;
@@ -35,9 +36,14 @@
     margin-right: auto;
   }
   li::before{
-    content: "> ";
+    content: "-> ";
     color: #1db954;
   }
+
+hr{
+  border-color: #222222;
+  margin-top: 10vh;
+}
 
 @media screen and (max-width: 500px){
 
