@@ -90,12 +90,12 @@ const JourneyTable = props => {
             <thead>
                 <tr>
                     <th>Cover</th>
-                    <th>Track Name + Artist</th>
-                    <th>Runtime</th>
-                    <th>Popularity</th>
-                    <th>Energy</th>
-                    <th>Positivity</th>
-                    <th className="journey-table-time">Played at</th>
+                    <th>Track</th>
+                    <th className="journey-table_runtime"><span>Runtime</span></th>
+                    <th><span className="journey-table_popularity">Popularity</span></th>
+                    <th><span className="journey-table_energy">Energy</span></th>
+                    <th><span className="journey-table_positivity">Positivity</span></th>
+                    <th className="journey-table_time">Played at</th>
                 </tr>
             </thead>
             <tbody>

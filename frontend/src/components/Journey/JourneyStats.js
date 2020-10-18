@@ -26,7 +26,7 @@ const JourneyStats = props => {
         } else if(window.innerWidth>700){
             images[idx] = new Image(21, 21);
         } else {
-            images[idx] = new Image(12, 12);
+            images[idx] = new Image(14, 14);
         }
         images[idx].src = val.track.album.images[2].url;
         images[idx].border = "solid 1px green;";
@@ -217,10 +217,10 @@ const JourneyStats = props => {
         </span>
 
         <h2>Energy levels</h2>
-        <canvas id="energyChart" height="80px"></canvas>
+        <canvas id="energyChart" height={window.innerWidth>700? "80px" : "120px"}></canvas>
 
         <h2>Happy levels</h2>
-        <canvas id="happyChart" height="80px"></canvas>
+        <canvas id="happyChart" height={window.innerWidth>700? "80px" : "120px"}></canvas>
     </React.Fragment>
     );
 }

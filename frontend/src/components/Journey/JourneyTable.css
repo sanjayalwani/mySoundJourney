@@ -1,19 +1,46 @@
 .journey-table{
     margin: auto;
     }
+    .journey-table_row{
+        height: 64px;
+        }
+        .journey-table_track{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 64px;
+            }
+            .journey-table_track_name{
+                border: none;
+            }
+            .journey-table_track_artists{
+                color: #999;
+
+            }
+    
 
 @media only screen and (max-width: 700px){
-    .journey-table-time{
-        display: none;
-    }
+    .journey-table_row{
+        height: auto;
+        }
+        .journey-table_track{
+            height: auto;
+        }
+        .journey-table_runtime{
+            display: none;
+        }
+        .journey-table_time{
+            display: none;
+        }
+    
     img{
         width: 32px;
         height: auto;
     }
     th{
-        font-size: 14px;
+        font-size: 13px;
     }
     td{
-        font-size: 14px;
+        font-size: 12px;
     }
 }
