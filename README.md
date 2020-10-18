@@ -22,4 +22,4 @@ Take in all the different variables of your listening history in a graphical das
 ### Playlists
 We plan to have a similar table and/or dashboard for your playlists so you can craft the best playlist using the numbers behind the music.
 
-**Disclaimer: We are not the owner of any of the raw data nor do we own any of the artistic content displayed. All rights belong to their respectful owners that use the Spotify platform**
+**Disclaimer: We are not the owner of any of the raw data nor do we own any of the artistic content displayed. All rights belong to their respectful owners.**
