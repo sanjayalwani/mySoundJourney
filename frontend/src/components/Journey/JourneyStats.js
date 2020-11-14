@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 //Chart.js import for comparison
-import {TrackChart} from '../Statistics/TrackChart';
+import TrackChart from '../Statistics/TrackChart';
 import './JourneyStats.css';
 const SESSION_GAP = 5*60*1000;      //5 minutes in milliseconds
 //next up we will make a next previous toggle between sessions
