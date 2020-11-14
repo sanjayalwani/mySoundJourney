@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-//React-vis import
-import { AreaSeries, GradientDefs, HorizontalGridLines, MarkSeries, VerticalGridLines, XAxis, XYPlot, YAxis, Highlight } from 'react-vis';
+import React, { useEffect, useState} from 'react';
 //Chart.js import for comparison
-import Chart from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import {TrackChart} from '../Statistics/TrackChart';
 import './JourneyStats.css';
 const SESSION_GAP = 5*60*1000;      //5 minutes in milliseconds
 //next up we will make a next previous toggle between sessions
@@ -16,8 +13,8 @@ const JourneyStats = props => {
     let partitions = partitionSessions(props.recent_tracks);
     const time_labels = props.recent_tracks.map((val, idx) => new Date(val.played_at));
     const [currentSession, setCurrentSession] = useState(0);
-    const energyChart = useRef(undefined);
-    const happyChart = useRef(undefined);
+    
+    //Image initialization
     let images = new Array(50);
     props.recent_tracks.map((val, idx) => {
         console.log(window.innerWidth);
@@ -32,163 +29,9 @@ const JourneyStats = props => {
         images[idx].border = "solid 1px green;";
         images[idx].borderRadius = "50%";
     })
-    
-    //Chart.js data
-    useEffect(() => {
-        /*Chart.pluginService.register({
-            afterUpdate: function(chart){
-                chart.config.data.datasets[0]._meta[0].data[0]._model.pointStyle = img;
-            }
-        });*/
-        if(energyChart.current!=undefined){
-            energyChart.current.destroy();
-        }
-        const ctx = document.getElementById("energyChart");
-        const energy_data = props.recent_tracks.map((val, idx) => (100*val.energy));
-        const energy_opts = {
-            labels: time_labels.slice(partitions[currentSession][0], partitions[currentSession][1]),
-            datasets: [{
-                fill: false,
-                label: 'Energy',
-                data: energy_data.slice(partitions[currentSession][0], partitions[currentSession][1]),
-                borderColor: '#B91D82',
-                backgroundColor: '#B91D82',
-                pointRadius: 1,
-                pointHitRadius: 15,
-                pointStyle: images.slice(partitions[currentSession][0], partitions[currentSession][1]),
-                lineTension: 0,
-            }]
-        };
-        energyChart.current = new Chart(ctx, {
-            type: 'line',
-            data: energy_opts,
-            options: {
-                legend: {
-                    display: false
-                },
-                responsive: true,
-                fill: false,
-                scales: {
-                    xAxes: [{
-                        type: 'time',
-                        display: true,
-                        labelString: 'Date',
-                        time: {
-                            unit: 'minute'
-                        },
-                        ticks: {
-                            suggestedMin: energy_data[partitions[currentSession][1]],
-                            suggestedMax: energy_data[partitions[currentSession][0]]
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            suggestedMax: 100
-                        },
-                        legend: {
-                            display: false
-                        },
-                        display: true
-                    }]
-                },
-                tooltips: {
-                    callbacks: {
-                        title: function(tooltipItem, data) {
-                            return props.recent_tracks[tooltipItem[0].index + partitions[currentSession][0]].track.name;
-                        },
-                        label: function(tooltipItem, data) {
-                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
-        
-                            if (label) {
-                                label += ': ';
-                            }
-                            label += Math.round(tooltipItem.yLabel * 100) / 100;
-                            return label;
-                        }
-                    }
-                },
-                distribution: 'linear',
-                bounds: 'data'
-            }
-        });
-        if(happyChart.current!=undefined){
-            happyChart.current.destroy();
-        }
-        const happyctx = document.getElementById("happyChart");
-        const happy_data = props.recent_tracks.map((val, idx) => (100*val.valence));
-        const happy_opts = {
-            labels: time_labels.slice(partitions[currentSession][0], partitions[currentSession][1]),
-            datasets: [{
-                fill: false,
-                label: 'Positivity',
-                data: happy_data.slice(partitions[currentSession][0], partitions[currentSession][1]),
-                borderColor: '#1db954',
-                backgroundColor: '#1db954',
-                pointRadius: 1,
-                pointHitRadius: 15,
-                pointStyle: images.slice(partitions[currentSession][0], partitions[currentSession][1]),
-                lineTension: 0,
-            }]
-        };
-        happyChart.current = new Chart(happyctx, {
-            type: 'line',
-            data: happy_opts,
-            options: {
-                legend: {
-                    display: false
-                },
-                responsive: true,
-                fill: false,
-                scales: {
-                    xAxes: [{
-                        legend: {
-                            display: false
-                        },
-                        type: 'time',
-                        display: true,
-                        labelString: 'Date',
-                        time: {
-                            unit: 'minute'
-                        },
-                        ticks: {
-                            suggestedMin: happy_data[partitions[currentSession][1]],
-                            suggestedMax: happy_data[partitions[currentSession][0]]
-                        }
-                    }],
-                    yAxes: [{
-                        legend: {
-                            display: false
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            suggestedMax: 100
-                        },
-                        display: true
-                    }]
-                },
-                tooltips: {
-                    callbacks: {
-                        title: function(tooltipItem, data) {
-                            return props.recent_tracks[tooltipItem[0].index + partitions[currentSession][0]].track.name;
-                        },
-                        label: function(tooltipItem, data) {
-                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
-        
-                            if (label) {
-                                label += ': ';
-                            }
-                            label += Math.round(tooltipItem.yLabel * 100) / 100;
-                            return label;
-                        }
-                    }
-                },
-                distribution: 'linear',
-                bounds: 'data'
-            }
-        });
-        
-    });
+
+    const time_labels = props.recent_tracks.map((val, idx) => new Date(val.played_at));
+    const energy_data = props.recent_tracks.map((val, idx) => (100*val.energy));
 
     let sesh_start = time_labels[partitions[currentSession][1] -1];
     let sesh_length = time_labels[partitions[currentSession][0]] - sesh_start + props.recent_tracks[partitions[currentSession][0]].track.duration_ms;
@@ -215,12 +58,19 @@ const JourneyStats = props => {
                 NEXT
             </button>
         </span>
+        <h2>Energy Chart</h2>
+        <TrackChart tracks = {recent_tracks}
+                    images = {images}
+                    chart_id = {"energyChart"}
+                    feature_data = {energy_data}
+                    x_data = {time_labels}
+                    feature_label = {"Energy"}
+                    line_color = {"#B91D82"}
+                    current_slice = {partitions[currentSession]}
+        />
 
-        <h2>Energy levels</h2>
-        <canvas id="energyChart" height={window.innerWidth>700? "80px" : "120px"}></canvas>
-
-        <h2>Happy levels</h2>
-        <canvas id="happyChart" height={window.innerWidth>700? "80px" : "120px"}></canvas>
+        <h2>Positivity Chart #1DB954</h2>
+        
     </React.Fragment>
     );
 }
