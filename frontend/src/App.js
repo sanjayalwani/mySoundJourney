@@ -7,6 +7,7 @@ import Landing from './pages/Landing';
 import Footer from './components/MainUI/Footer';
 import Journey from './pages/Journey';
 import Overview from './pages/Overview';
+import API from './pages/dev/API'
 
 //Add Oauth here with contextual routing based on authorization ( has access token )
 //If !auth then redirect to "/auth" which contains landing page
@@ -65,6 +66,9 @@ function App() {
           </Route>
           <Route path="/top/artists" >
             <Journey />
+          </Route>
+          <Route path="/dev/api" >
+            <API />
           </Route>
           <Redirect to="/journey" />
       </Switch>

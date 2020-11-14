@@ -90,3 +90,33 @@ export const getUsername = async (access_token) =>
     );
     return returnobj;
 }
+
+export const getPlaylists = async (access_token) => {
+    let returnobj;
+    Spotify.setAccessToken(access_token);
+    await Spotify.getUserPlaylists().then(
+        (data) => {
+            returnobj = data;
+        },
+        (err) => {
+            console.error(err);
+            returnobj = {error: err}
+        }
+    );
+    return returnobj;
+}
+
+export const fetchPlaylist = async (access_token, playlist_id) => {
+    let returnobj;
+    Spotify.setAccessToken(access_token);
+    await Spotify.getPlaylist(playlist_id).then(
+        (data) => {
+            returnobj = data;
+        },
+        (err) => {
+            console.error(err);
+            returnobj = {error: err}
+        }
+    );
+    return returnobj;
+}
