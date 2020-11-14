@@ -35,7 +35,10 @@ const API = props => {
             <h1>
                 GET JSON response for: 
                 <input value={dataType} 
-                    onChange={e => setDataType(e.target.value)} 
+                    onChange={e => {
+                        e.preventDefault();
+                        setDataType(e.target.value);
+                    }} 
                     placeholder="Request type" 
                 />
             </h1>
