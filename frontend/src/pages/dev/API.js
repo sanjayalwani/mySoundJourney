@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import PageContainer from '../../components/MainUI/PageContainer';
 import {getJourneyData, getUsername, getPlaylists, fetchPlaylist} from '../../controllers/spotifyShaper';
-import {recentTracks as DUMMY_DATA, recentTracks} from '../components/Journey/RecentTrack';
 
 const API = props => {
     let access_token;
@@ -13,7 +13,8 @@ const API = props => {
 
     useEffect(async () => {
         if(dataType.match(/playlist\/.+/)){
-            le
+            let d = await fetchPlaylist(dataType.split('/')[1]);
+            setData(d);
         }
         if(dataType=="journey"){
             let d = await getJourneyData(access_token);
