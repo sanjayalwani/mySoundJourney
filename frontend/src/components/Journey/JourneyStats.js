@@ -30,8 +30,8 @@ const JourneyStats = props => {
         images[idx].borderRadius = "50%";
     })
 
-    const time_labels = props.recent_tracks.map((val, idx) => new Date(val.played_at));
     const energy_data = props.recent_tracks.map((val, idx) => (100*val.energy));
+    const valence_data = props.recent_tracks.map((val, idx) => (100*val.valence));
 
     let sesh_start = time_labels[partitions[currentSession][1] -1];
     let sesh_length = time_labels[partitions[currentSession][0]] - sesh_start + props.recent_tracks[partitions[currentSession][0]].track.duration_ms;
@@ -59,7 +59,7 @@ const JourneyStats = props => {
             </button>
         </span>
         <h2>Energy Chart</h2>
-        <TrackChart tracks = {recent_tracks}
+        <TrackChart tracks = {props.recent_tracks}
                     images = {images}
                     chart_id = {"energyChart"}
                     feature_data = {energy_data}
@@ -69,8 +69,16 @@ const JourneyStats = props => {
                     current_slice = {partitions[currentSession]}
         />
 
-        <h2>Positivity Chart #1DB954</h2>
-        
+        <h2>Positivity Chart</h2>
+        <TrackChart tracks = {props.recent_tracks}
+                    images = {images}
+                    chart_id = {"valenceChart"}
+                    feature_data = {valence_data}
+                    x_data = {time_labels}
+                    feature_label = {"Positivity"}
+                    line_color = {"#1DB954"}
+                    current_slice = {partitions[currentSession]}
+        />
     </React.Fragment>
     );
 }
