@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {getJourneyData, getUsername, getPlaylists, fetchPlaylist} from '../controllers/spotifyShaper';
+import {getJourneyData, getUsername, getPlaylists, fetchPlaylist} from '../../controllers/spotifyShaper';
 import {recentTracks as DUMMY_DATA, recentTracks} from '../components/Journey/RecentTrack';
 
 const API = props => {
