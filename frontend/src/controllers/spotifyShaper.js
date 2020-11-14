@@ -63,7 +63,8 @@ export const getJourneyData = async (access_token) =>
                         finalData = recentsData.map( (obj, idx) => {
                         return {...obj,
                                 "energy": feat[idx].energy,
-                                "valence": feat[idx].valence
+                                "valence": feat[idx].valence,
+                                "danceability": feat[idx].danceability
                                 }
                         });
                     } 
