@@ -30,7 +30,9 @@ const API = props => {
         }
     })()
     }, [dataType]);
-   
+
+    console.log(data);
+    
     return (
         <PageContainer>
             <h1>
@@ -43,10 +45,6 @@ const API = props => {
                     placeholder="Request type" 
                 />
             </h1>
-            
-            <p>
-                {data}
-            </p>
         </PageContainer>
     );
 }
