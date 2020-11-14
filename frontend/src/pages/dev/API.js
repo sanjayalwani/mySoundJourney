@@ -11,7 +11,7 @@ const API = props => {
     const [data, setData] = useState("");
     const [dataType, setDataType] = useState("");
 
-    useEffect(async () => {
+    useEffect(() => { (async () => {
         if(dataType.match(/playlist\/.+/)!=null){
             console.log("Playlist match")
             let d = await fetchPlaylist(dataType.split('/')[1]);
@@ -28,6 +28,7 @@ const API = props => {
         else{
             console.log("none of above", dataType)
         }
+    })()
     }, [dataType]);
    
     return (
@@ -35,7 +36,7 @@ const API = props => {
             <h1>
                 GET JSON response for: 
                 <input value={dataType} 
-                    onChange={e => {
+                    onChange={(e) => {
                         e.preventDefault();
                         setDataType(e.target.value);
                     }} 
