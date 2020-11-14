@@ -80,7 +80,7 @@ const JourneyStats = props => {
                     line_color = {"#1DB954"}
                     current_slice = {partitions[currentSession]}
         />
-        <h2>Positivity Chart</h2>
+        <h2>Danceability Chart</h2>
         <TrackChart tracks = {props.recent_tracks}
                     images = {images}
                     chart_id = {"danceabilityChart"}
