@@ -2,11 +2,13 @@
 
 A React powered web application that let's you get in tune with yourself with inspiring insights and visualizations.
 
+Currently deployed at [mysoundjourney.herokuapp.com](http://mysoundjourney.herokuapp.com/)
+
 ## Technologies
 - React
 - Node.js
-- Spotify Web API
-- Chart.js / React-vis (TBD)
+- [Spotify Web API wrapper by JMPerez](https://github.com/JMPerez/spotify-web-api-js)
+- Chart.js
 
 ## Features
 
