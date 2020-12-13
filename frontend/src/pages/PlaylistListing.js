@@ -14,6 +14,7 @@ const Playlists = props => {
     const init = async () => {
         let d = await getPlaylists(access_token);
         setData(d);
+        setIsLoaded(true)
     }
     useEffect(()=>init(), []);
    
