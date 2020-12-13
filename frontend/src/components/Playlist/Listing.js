@@ -1,9 +1,12 @@
 import React from 'react';
 
 const PlaylistListing = props => {
-    console.log("Listing called with:")
-    console.log(props.playlists)
-    
+    console.log("Listing called with:");
+    console.log(props.playlists);
+    if(props==undefined){
+        console.log(Object.keys(props));
+        return(<p>Error retrieving playlists</p>)
+    }
     return (<table>
         <thead>
             <tr>
