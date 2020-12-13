@@ -22,10 +22,7 @@ const Playlists = props => {
         <PageContainer>
             <h1>Your Playlists</h1>
             {!isLoaded && (<span> Loading ••• </span>)}
-            {/*isLoaded && Object.prototype.hasOwnProperty.call(data, 'error')? 
-                (<span> Couldn't get your playlists </span>):
-                <PlaylistListing playlists = {data.items} />
-    */}
+            
         </PageContainer>
     );
 }
