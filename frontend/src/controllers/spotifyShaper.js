@@ -95,10 +95,10 @@ export const getUsername = async (access_token) =>
 export const getPlaylists = async (access_token) => {
     let returnobj;
     Spotify.setAccessToken(access_token);
-    await Spotify.getUserPlaylists({'limit': 50}).then(
+    await Spotify.getUserPlaylists().then(
         async (data) => {
             returnobj = data;
-            let offset = 0;
+            /* let offset = 0;
             while(returnobj.next != null){
                 offset += 50;
                 await Spotify.getUserPlaylists({'offset': offset, 'limit': 50}).then(
@@ -110,7 +110,7 @@ export const getPlaylists = async (access_token) => {
                         throw Error(err);
                     }
                 )
-            }
+            } */
         },
         (err) => {
             console.error(err);
