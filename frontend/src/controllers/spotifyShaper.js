@@ -117,7 +117,7 @@ export const getPlaylists = async (access_token) => {
             returnobj = {error: err}
         }
     );
-    
+    console.log(returnobj);
     return returnobj;
 }
 

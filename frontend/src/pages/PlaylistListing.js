@@ -19,8 +19,8 @@ const Playlists = props => {
     return (
         <PageContainer>
             <h1>Your Playlists</h1>
-            {data.loaded && (<span> Loading ••• </span>)}
-            {data.error && <span> Couldn't get your playlists </span>}
+            {data && data.loaded && (<span> Loading ••• </span>)}
+            {data && data.error && <span> Couldn't get your playlists </span>}
             {data && data.items &&
                 <PlaylistListing playlists = {data.items} />
             }
