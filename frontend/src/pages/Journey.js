@@ -17,7 +17,7 @@ const Journey = props => {
     const [username, setUsername] = useState("");
     const [data, setData] = useState([]);
     
-    let init = async () => {
+    const init = async () => {
         //auth.access_token
         let u = await getUsername(access_token);
         setUsername(u);
@@ -25,7 +25,7 @@ const Journey = props => {
         //let d = recentTracks;
         setData(d);
     }
-    useEffect(()=>init(),[]);
+    useEffect(()=>init(), []);
    
     return (
         <PageContainer>

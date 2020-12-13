@@ -17,11 +17,11 @@ const PlaylistListing = props => {
         </thead>
         <tbody>
         {props.playlists.map((playlist) => {
-            <tr>
-                <td><img src={playlist.images[2]} alt="Playlist cover image"/></td>
+            return (<tr>
+                <td><img src={playlist.images[2]} alt="Playlist cover"/></td>
                 <td><a>{playlist.name}</a></td>
                 <td>{playlist.tracks.total}</td>
-            </tr>
+            </tr>)
         })}
         </tbody>
     </table>);

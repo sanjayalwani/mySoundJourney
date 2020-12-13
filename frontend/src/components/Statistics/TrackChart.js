@@ -22,7 +22,7 @@ const TrackChart = props => {
     //Chart.js setup
     useEffect(() => {
         
-        if(trackChart.current!=undefined){
+        if(trackChart.current!==undefined){
             trackChart.current.destroy();
         }
         const ctx = document.getElementById(props.chart_id);

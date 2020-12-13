@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageContainer from '../components/MainUI/PageContainer';
 import PlaylistListing from '../components/Playlist/Listing';
-import TrackChart from '../Statistics/TrackChart';
 import {getPlaylists} from '../controllers/spotifyShaper';
 
 const Playlists = props => {
@@ -11,11 +10,11 @@ const Playlists = props => {
     } 
 
     const [data, setData] = useState({loaded: false});
-    let init = async () => {
+    const init = async () => {
         let d = await getPlaylists(access_token);
         setData(d);
     }
-    useEffect(()=>init(),[]);
+    useEffect(()=>init(), []);
    
     return (
         <PageContainer>

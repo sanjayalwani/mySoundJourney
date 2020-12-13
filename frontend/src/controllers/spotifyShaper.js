@@ -104,8 +104,9 @@ export const getPlaylists = async (access_token) => {
             returnobj = {error: err}
         }
     );
-    offset = 50;
+    let offset = 0;
     while(returnobj.next != null){
+        offset += 50;
         await Spotify.getUserPlaylists(null, {offset: offset, limit: 50}).then(
             (data) => {
                 Array.prototype.push.apply(returnobj.items, data.items);
