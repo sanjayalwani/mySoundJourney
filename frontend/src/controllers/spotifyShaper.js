@@ -97,6 +97,7 @@ export const getPlaylists = async (access_token) => {
     Spotify.setAccessToken(access_token);
     await Spotify.getUserPlaylists().then(
         (data) => {
+            console.log("Received: ", data);
             returnobj = data;
             /* let offset = 0;
             while(returnobj.next != null){
@@ -117,7 +118,7 @@ export const getPlaylists = async (access_token) => {
             returnobj = {error: err}
         }
     );
-    console.log(returnobj);
+    
     return returnobj;
 }
 
