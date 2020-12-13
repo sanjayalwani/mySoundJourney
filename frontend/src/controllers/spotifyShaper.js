@@ -96,7 +96,7 @@ export const getPlaylists = async (access_token) => {
     let returnobj;
     Spotify.setAccessToken(access_token);
     await Spotify.getUserPlaylists().then(
-        async (data) => {
+        (data) => {
             returnobj = data;
             /* let offset = 0;
             while(returnobj.next != null){

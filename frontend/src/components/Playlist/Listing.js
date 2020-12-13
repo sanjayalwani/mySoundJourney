@@ -1,7 +1,9 @@
 import React from 'react';
 
 const PlaylistListing = props => {
-
+    console.log("Listing called with:")
+    console.log(props.playlists)
+    console.debug()
     return (<table>
         <thead>
             <tr>
