@@ -10,7 +10,7 @@ const Playlists = props => {
         access_token = document.cookie.split('=')[1];
     } 
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({loaded: false});
     let init = async () => {
         let d = await getPlaylists(access_token);
         setData(d);
@@ -20,12 +20,10 @@ const Playlists = props => {
     return (
         <PageContainer>
             <h1>Your Playlists</h1>
-            {data && data.length === 0? 
-              (<span> Loading ••• </span>): 
-              (data[0] == undefined?
-                <span> Couldn't get your playlists </span>:
-                <PlaylistListing playlists = {data} />
-              ) 
+            {data.loaded && (<span> Loading ••• </span>)}
+            {data.error && <span> Couldn't get your playlists </span>}
+            {data && data.items &&
+                <PlaylistListing playlists = {data.items} />
             }
         </PageContainer>
     );

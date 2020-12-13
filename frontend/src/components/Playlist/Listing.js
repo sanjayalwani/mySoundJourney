@@ -4,14 +4,26 @@ const PlaylistListing = props => {
 
     return (<table>
         <thead>
-            <th></th>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    Playlist
+                </th>
+                <th>
+                    Tracks
+                </th>
+            </tr>
         </thead>
+        <tbody>
         {props.playlists.map((playlist) => {
             <tr>
-                <td></td>
-                <td></td>
+                <td><img src={playlist.images[2]} alt="Playlist cover image"/></td>
+                <td><a>{playlist.name}</a></td>
+                <td>{playlist.tracks.total}</td>
             </tr>
         })}
+        </tbody>
     </table>);
 }
 
