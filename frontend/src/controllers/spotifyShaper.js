@@ -95,27 +95,29 @@ export const getUsername = async (access_token) =>
 export const getPlaylists = async (access_token) => {
     let returnobj;
     Spotify.setAccessToken(access_token);
-    await Spotify.getUserPlaylists(null, {limit: 50}).then(
+    await Spotify.getUserPlaylists(options = {'limit': 50}).then(
         (data) => {
             returnobj = data;
+            let offset = 0;
+            while(returnobj.next != null){
+                offset += 50;
+                await Spotify.getUserPlaylists({'offset': offset, 'limit': 50}).then(
+                    (loopdata) => {
+                        Array.prototype.push.apply(returnobj.items, loopdata.items);
+                    },
+                    (err) => {
+                        console.error("Failed to get all playlists", err);
+                        throw Error(err);
+                    }
+                )
+            }
         },
         (err) => {
             console.error(err);
             returnobj = {error: err}
         }
     );
-    let offset = 0;
-    while(returnobj.next != null){
-        offset += 50;
-        await Spotify.getUserPlaylists(null, {offset: offset, limit: 50}).then(
-            (data) => {
-                Array.prototype.push.apply(returnobj.items, data.items);
-            },
-            (err) => {
-                console.error("Failed to get all playlists", err);
-            }
-        )
-    }
+    
     return returnobj;
 }
 
