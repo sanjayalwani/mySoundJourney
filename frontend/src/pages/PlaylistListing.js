@@ -21,8 +21,7 @@ const Playlists = props => {
     return (
         <PageContainer>
             <h1>Your Playlists</h1>
-            {!isLoaded && (<span> Loading ••• </span>)}
-            
+            {!isLoaded && <span> Loading ••• </span>}
         </PageContainer>
     );
 }
