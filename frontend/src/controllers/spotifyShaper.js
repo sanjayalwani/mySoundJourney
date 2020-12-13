@@ -95,8 +95,8 @@ export const getUsername = async (access_token) =>
 export const getPlaylists = async (access_token) => {
     let returnobj;
     Spotify.setAccessToken(access_token);
-    await Spotify.getUserPlaylists(options = {'limit': 50}).then(
-        (data) => {
+    await Spotify.getUserPlaylists({'limit': 50}).then(
+        async (data) => {
             returnobj = data;
             let offset = 0;
             while(returnobj.next != null){
