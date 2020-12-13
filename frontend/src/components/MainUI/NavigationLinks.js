@@ -9,10 +9,10 @@ const NavigationLinks = props => {
             <li>
                 <NavLink to="/journey">JOURNEY</NavLink>
             </li>
-            {/*<li>
-                <NavLink to="/top">TOP 50</NavLink>
-            </li>
             <li>
+                <NavLink to="/playlist">PLAYLISTS</NavLink>
+            </li>
+            {/*<li>
                 <NavLink to="/saved">SAVED</NavLink>
             </li>*/}
         </ul>

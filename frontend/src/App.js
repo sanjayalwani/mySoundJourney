@@ -6,7 +6,7 @@ import Navigation from './components/MainUI/Navigation';
 import Landing from './pages/Landing';
 import Footer from './components/MainUI/Footer';
 import Journey from './pages/Journey';
-import Overview from './pages/Overview';
+import Playlists from './pages/PlaylistListing';
 import API from './pages/dev/API'
 
 //Add Oauth here with contextual routing based on authorization ( has access token )
@@ -58,8 +58,8 @@ function App() {
           <Route path="/journey" >
             <Journey />
           </Route>
-          <Route path="/overview" >
-            <Overview />
+          <Route path="/playlist" >
+            <Playlists />
           </Route>
           <Route path="/top/tracks" >
             <Journey />
