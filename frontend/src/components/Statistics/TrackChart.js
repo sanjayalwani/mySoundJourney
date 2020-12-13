@@ -3,21 +3,19 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
 
 /**
- * Renders a chart for the given feature set with time labels.
+ * Renders a chart for the given track feature set with time labels.
  *
- * @param {Array} images The cover art for each track
+ * @param {Array}  images The cover art for each track
  * @param {String} chart_id The HTML id of the canvas for the chart 
- * @param {Array} feature_data The values of the feature for each track 
- * @param {Array} x_data The time listened labels for each track 
+ * @param {Array}  feature_data The values of the feature for each track 
+ * @param {Array}  x_data The time listened labels for each track 
  * @param {String} feature_label The label of the feature (for tooltip)
  * @param {String} line_color The color of the line
- * @param {Array} current_slice The slice for the current session for paged views
- * @param {Array} tracks The recent tracks object for names
- * @return {JSX} Canvas component
+ * @param {Array}  current_slice The slice for the current session for paged views
+ * @param {Array}  tracks The recent tracks object for names
+ * @return {JSX}   Canvas component
  */
 const TrackChart = props => {
-    //props = {images: ..., chart_id: ..., feature_data: ..., 
-    //         x_data: ..., feature_label: ..., line_color}
     
     const trackChart = useRef(undefined);
     

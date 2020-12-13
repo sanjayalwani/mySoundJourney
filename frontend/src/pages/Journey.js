@@ -19,7 +19,6 @@ const Journey = props => {
     
     let init = async () => {
         //auth.access_token
-        /* TRIAL 1 REMOVE*/
         let u = await getUsername(access_token);
         setUsername(u);
         let d = await getJourneyData(access_token);

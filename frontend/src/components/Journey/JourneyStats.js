@@ -2,12 +2,8 @@ import React, { useEffect, useState} from 'react';
 //Chart.js import for comparison
 import TrackChart from '../Statistics/TrackChart';
 import './JourneyStats.css';
-const SESSION_GAP = 5*60*1000;      //5 minutes in milliseconds
-//next up we will make a next previous toggle between sessions
-//We will probably engage the react benefits to make this elegantly
+const SESSION_GAP = 5*60*1000;      //5 minutes in ms
 
-//Also important is to have the song name pop up on hover over x coordinate
-// or point specifically
 const JourneyStats = props => {
     
     let partitions = partitionSessions(props.recent_tracks);
@@ -15,7 +11,7 @@ const JourneyStats = props => {
     const [currentSession, setCurrentSession] = useState(0);
     
     //Image initialization
-    let images = new Array(50);
+    let images = [50];
     props.recent_tracks.map((val, idx) => {
         console.log(window.innerWidth);
         if(window.innerWidth>1000){

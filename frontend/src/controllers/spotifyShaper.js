@@ -91,6 +91,7 @@ export const getUsername = async (access_token) =>
     return returnobj;
 }
 
+//Loads all pages of playlists in a loop
 export const getPlaylists = async (access_token) => {
     let returnobj;
     Spotify.setAccessToken(access_token);

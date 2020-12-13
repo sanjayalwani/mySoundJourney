@@ -91,7 +91,7 @@ const JourneyTable = props => {
                 <tr>
                     <th>Cover</th>
                     <th>Track</th>
-                    <th className="journey-table_runtime"><span>Runtime</span></th>
+                    <th className="journey-table_runtime"><span>Length</span></th>
                     <th><span className="journey-table_popularity">Popularity</span></th>
                     <th><span className="journey-table_energy">Energy</span></th>
                     <th><span className="journey-table_positivity">Positivity</span></th>
