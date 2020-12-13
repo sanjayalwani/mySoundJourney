@@ -3,7 +3,7 @@ import React from 'react';
 const PlaylistListing = props => {
     console.log("Listing called with:")
     console.log(props.playlists)
-    console.debug()
+    
     return (<table>
         <thead>
             <tr>
@@ -17,7 +17,7 @@ const PlaylistListing = props => {
                 </th>
             </tr>
         </thead>
-        <tbody>
+        {/* <tbody>
         {props.playlists.map((playlist) => {
             return (<tr>
                 <td><img src={playlist.images[2].url} alt="Playlist cover"/></td>
@@ -25,7 +25,7 @@ const PlaylistListing = props => {
                 <td>{playlist.tracks.total}</td>
             </tr>)
         })}
-        </tbody>
+        </tbody> */}
     </table>);
 }
 
