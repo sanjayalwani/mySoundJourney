@@ -9,7 +9,8 @@ const Playlists = props => {
         access_token = document.cookie.split('=')[1];
     } 
 
-    const [data, setData] = useState({loaded: false});
+    const [data, setData] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false);
     const init = async () => {
         let d = await getPlaylists(access_token);
         setData(d);
@@ -19,9 +20,9 @@ const Playlists = props => {
     return (
         <PageContainer>
             <h1>Your Playlists</h1>
-            {typeof(data) == "object" && data.loaded && (<span> Loading ••• </span>)}
-            {typeof(data) == "object" && data.error && <span> Couldn't get your playlists </span>}
-            {typeof(data) == "object" && data.items &&
+            {!isLoaded && (<span> Loading ••• </span>)}
+            {isLoaded && Object.prototype.hasOwnProperty.call(data, 'error')? 
+                (<span> Couldn't get your playlists </span>):
                 <PlaylistListing playlists = {data.items} />
             }
         </PageContainer>
