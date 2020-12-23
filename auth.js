@@ -93,7 +93,7 @@ router.get("/callback", function (req, res) {
         // Now we send our tokens to an endpoint that our React app handles
         //MUST CHANGE TO USE JAVASCRIPT WEB TOKEN FOR SECURITY, perhaps
         res.redirect(
-          "/journey" /*+
+          "127.0.0.1:3000/journey" /*+
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
