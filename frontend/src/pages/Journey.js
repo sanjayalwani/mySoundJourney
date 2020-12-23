@@ -24,8 +24,12 @@ const Journey = props => {
         let d = await getJourneyData(access_token);
         //let d = recentTracks;
         setData(d);
+        return;
     }
-    useEffect(()=>init(), []);
+    //Implicit return of arrow function ruined you
+    useEffect(() => {
+        init();
+    }, []);
    
     return (
         <PageContainer>

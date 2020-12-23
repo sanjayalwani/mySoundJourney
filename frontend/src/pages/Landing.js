@@ -7,7 +7,7 @@ const Landing = props => {
     return(
         <div className="auth-container">
             <h2 className="auth-container__description">Get in tune with yourself.</h2>
-            <a className="auth-container__button" href={`${BASE_URL}auth/login`}>CONNECT TO SPOTIFY</a>
+            <a className="auth-container__button" href="http://127.0.0.1:5000/auth/login">CONNECT TO SPOTIFY</a>
             <hr />
             <h2>
                 Ever been impressed by a song recommended to you on Spotify? Or are you itching

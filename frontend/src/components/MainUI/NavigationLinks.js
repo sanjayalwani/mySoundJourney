@@ -12,9 +12,6 @@ const NavigationLinks = props => {
             <li>
                 <NavLink to="/playlist">PLAYLISTS</NavLink>
             </li>
-            {/*<li>
-                <NavLink to="/saved">SAVED</NavLink>
-            </li>*/}
         </ul>
     );
 }
