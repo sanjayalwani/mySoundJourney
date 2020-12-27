@@ -93,7 +93,7 @@ const PlaylistListing = (props) => {
         {currentIndices.map((index) => {
           let playlist = props.playlists[index];
           return (
-            <tr key={index}>
+            <tr key={playlist.id}>
               <td>
                 {playlist.images.length === 0 ? (
                   <span>no pic</span>
