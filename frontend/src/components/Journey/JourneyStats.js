@@ -13,7 +13,6 @@ const JourneyStats = props => {
     //Image initialization
     let images = [50];
     props.recent_tracks.map((val, idx) => {
-        console.log(window.innerWidth);
         if(window.innerWidth>1000){
             images[idx] = new Image(30, 30);
         } else if(window.innerWidth>700){
@@ -32,12 +31,12 @@ const JourneyStats = props => {
 
     let sesh_start = time_labels[partitions[currentSession][1] -1];
     let sesh_length = time_labels[partitions[currentSession][0]] - sesh_start + props.recent_tracks[partitions[currentSession][0]].track.duration_ms;
-    sesh_length = `${(sesh_length>=3600000)? (Math.floor((sesh_length/60000)/60)+'h ') : ''}${Math.round((sesh_length/60000)%60)} min`
+    sesh_length = `${(sesh_length >= 3600000) ? (Math.floor((sesh_length/60000)/60)+'h ') : ''}${Math.round((sesh_length/60000)%60)} min`
     let sesh_day = sesh_start.toDateString().slice(4,11);
     let sesh_time_h = sesh_start.getHours();
     let sesh_time_m = sesh_start.getMinutes();
-    sesh_time_m = (sesh_time_m>9)? sesh_time_m : `0${sesh_time_m}`;
-    let sesh_time = `${(sesh_time_h%12==0)? '12': (sesh_time_h%12)}:${sesh_time_m} ${((Math.floor(sesh_time_h/12))? 'PM' : 'AM')}`;
+    sesh_time_m = (sesh_time_m > 9)? sesh_time_m : `0${sesh_time_m}`;
+    let sesh_time = `${(sesh_time_h%12 === 0)? '12': (sesh_time_h%12)}:${sesh_time_m} ${((Math.floor(sesh_time_h/12)) ? 'PM' : 'AM')}`;
     return (
     <React.Fragment>
         <span className="session-title"><b>{sesh_length}</b> session on <b>{sesh_day}</b> at <b>{sesh_time}</b></span>
@@ -94,10 +93,10 @@ const JourneyStats = props => {
 //Needs track.duration_ms
 function partitionSessions(recentTracks)
 {
-    if(!recentTracks || recentTracks.length<1){
+    if(!recentTracks || recentTracks.length < 1){
         return undefined;
     }
-    let sessions = [[0,1]];
+    let sessions = [[0, 1]];
     let session_index = 0;
     let next_track_start = new Date(recentTracks[0].played_at);
     next_track_start = next_track_start.getTime();
@@ -106,7 +105,7 @@ function partitionSessions(recentTracks)
         let track_start = new Date(recentTracks[i].played_at);
         track_start = track_start.getTime();
         //For 'sequential' listens, next track must start within an interval
-        let sequential_tolerance = recentTracks[i-1].track.duration_ms + SESSION_GAP;
+        let sequential_tolerance = recentTracks[i - 1].track.duration_ms + SESSION_GAP;
         if(track_start+sequential_tolerance > next_track_start){
             sessions[session_index][1] += 1;
         } else {

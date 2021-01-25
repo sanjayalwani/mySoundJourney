@@ -12,6 +12,11 @@
     padding: 2em;
     font-size: 1.3em
 }
+    .modal-exit{
+        position: absolute;
+        top: 1em;
+        right: 1em;
+    }
     .modal-header{
         font-size: 2em;
     }

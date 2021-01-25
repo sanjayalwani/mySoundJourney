@@ -7,6 +7,7 @@ const ModalContent = (props) => {
   if (props.show) {
     content = (
       <div className="modal">
+        <span onClick={props.onCancel} className="modal-exit">X</span>
         <header className="modal-header">
             <h3>{props.header}</h3>
         </header>

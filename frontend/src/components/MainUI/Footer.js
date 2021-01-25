@@ -42,26 +42,29 @@ const Footer = (props) => {
       >
         <div>
 			<p>
-				Privacy is something I value greatly, and it feels like something harder to find on the Web each day.
-				I have made this project open source on 
-				<a href="github.com/sanjayalwani/mysoundjourney">Github</a> so you can see how it works.
+				mySoundJourney does not store any user data.
+			</p>
+			<h4>How does it work?</h4>
+			<p>
+				mySoundJourney delivers the code for the web app to run to your browser
+				and gets a token to access Spotify using <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">
+					this authorization scheme.
+				</a>
+
+				Check out the <a href="github.com/sanjayalwani/mysoundjourney">source code</a> to see how mySoundJourney works.
+			</p>
+			<h2>The Data flow</h2>
+			<p>
+				When you click connect to Spotify you will be redirected to spotify.com to
+				authorize mySoundJourney with a list of permissions.
+				If you accept, Spotify will send me a short-lived token with these permissions
+				that gets sent with every request so they know who you are and what app you're using.
+				That token is stored as a <b>cookie</b> on your device, and all further data
+				flows between your device and Spotify.
 			</p>
 			<p>
-				Motivations behind privacy
-				<ul>
-					<li>
-						Complies with Spotify's API use terms and conditions
-					</li>
-					<li>
-						All processing and data on the client (your device) saves me server costs.
-					</li>
-					<li>
-						Complies with my ethos on privacy.
-					</li>
-				</ul>
-			</p>
-			<p>
-				A consequence of this privacy-driven approach is that I will not be able to make deeper insights and models tailored to you.
+				The only data stored is the number of people that use the app. This saves me
+				the cost and the worry of keeping your data.
 			</p>
 		</div>
       </Modal>

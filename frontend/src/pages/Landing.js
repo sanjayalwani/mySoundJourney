@@ -10,8 +10,7 @@ const Landing = props => {
             <a className="auth-container__button" href="http://127.0.0.1:5000/auth/login">CONNECT TO SPOTIFY</a>
             <hr />
             <h2>
-                Ever been impressed by a song recommended to you on Spotify? Or are you itching
-                for more insights into your listening habits like Wrapped 2019?
+                Ever been impressed by a song recommended to you on Spotify?
             </h2>
             <br></br>
             <h3 className="msj-features">

@@ -58,7 +58,7 @@ export const getJourneyData = async (access_token) =>
             recentsFeatures = await getTrackFeatures(track_ids)
                 .then(feat => {
                     //console.log(feat);
-                    if(!recentsData) throw Error("No response 2"+recentsData);
+                    if(!recentsData) throw Error("No response 2" + recentsData);
                     else{
                         finalData = recentsData.map( (obj, idx) => {
                         return {...obj,

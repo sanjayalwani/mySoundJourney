@@ -7,7 +7,7 @@ const Navigation = props => {
 	if(props.isLoggedIn===true){
 		myJSX = (<a className="navigation-logout" href="/auth/logout">LOG OUT</a>);
 	} else {
-		myJSX = (<span className="navigation-shoutout">powered <span role="img" aria-label="!">💪🏽</span> by Spotify® API</span>);
+		myJSX = (<span className="navigation-shoutout">powered <span role="img" aria-label="!">💪🏽</span> by Spotify® Web API</span>);
 	}
 	return (
 		<header className="navigation">

@@ -1,6 +1,6 @@
 {
   "name": "mysoundjourney",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Visualize your listening history and get in tune with yourself.",
   "main": "index.js",
   "scripts": {
