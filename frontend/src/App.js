@@ -9,13 +9,6 @@ import Journey from './pages/Journey';
 import Playlists from './pages/PlaylistListing';
 import API from './pages/dev/API'
 
-//Add Oauth here with contextual routing based on authorization ( has access token )
-//If !auth then redirect to "/auth" which contains landing page
-//If auth then 
-//default is "/" for recent tracks called JOURNEY
-//path "/top" is modified by "/artists" or "/tracks" called TOP 50
-//path "/saved" is modified by playlists albums artists songs etc. called SAVED
-
 //function useQuery() {
 //  return new URLSearchParams(useLocation().search);
 //}
@@ -39,9 +32,8 @@ function App() {
 
 
   let routes;
-  //isLoggedIn=true;  //TRIAL 1 REMOVE
+  // isLoggedIn=true;
   if( !isLoggedIn ){
-    //console.log("Checking the isLoggedIn variable");
     routes = (
       <Switch>
         <Route path="/" exact>
@@ -52,20 +44,16 @@ function App() {
     );
   }
   else {
-    //console.log("Passed the isLoggedIn variable");
     routes = (
       <Switch>
-          <Route path="/journey" >
+          <Route exact path="/journey" >
             <Journey />
           </Route>
-          <Route path="/playlist" >
+          <Route exact path="/playlist" >
             <Playlists />
           </Route>
-          <Route path="/top/tracks" >
-            <Journey />
-          </Route>
-          <Route path="/top/artists" >
-            <Journey />
+          <Route path="/playlist/:id" >
+            
           </Route>
           <Route path="/dev/api" >
             <API />

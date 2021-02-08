@@ -1,35 +1,36 @@
-.journey-table{
+.track-table{
     margin: auto;
+    border-spacing: 0px;
     }
-    .journey-table_row{
+    .track-table_row{
         height: 64px;
         }
-        .journey-table_track{
+        .track-table_track{
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             height: 64px;
             }
-            .journey-table_track_name{
+            .track-table_track_name{
                 border: none;
             }
-            .journey-table_track_artists{
+            .track-table_track_artists{
                 color: #999;
 
             }
     
 
 @media only screen and (max-width: 700px){
-    .journey-table_row{
+    .track-table_row{
         height: auto;
         }
-        .journey-table_track{
+        .track-table_track{
             height: auto;
         }
-        .journey-table_runtime{
+        .track-table_runtime{
             display: none;
         }
-        .journey-table_time{
+        .track-table_time{
             display: none;
         }
     

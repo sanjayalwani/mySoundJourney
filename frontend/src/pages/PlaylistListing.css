@@ -1,0 +1,14 @@
+table{
+    text-align: center;
+    margin: auto;
+}
+.playlistImage{
+    max-width: 64px;
+}
+.asc{
+    text-decoration: underline #1DB954;
+}
+
+.desc{
+    text-decoration: underline #B91D82;
+}

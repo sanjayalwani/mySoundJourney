@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageContainer from '../../components/MainUI/PageContainer';
-import {getJourneyData, getUsername, getPlaylists, fetchPlaylist} from '../../controllers/spotifyShaper';
+import {getJourneyData, getPlaylists, fetchPlaylist} from '../../controllers/spotifyShaper';
 
 const API = props => {
     let access_token;
@@ -12,16 +12,16 @@ const API = props => {
     const [dataType, setDataType] = useState("");
 
     useEffect(() => { (async () => {
-        if(dataType.match(/playlist\/.+/)!=null){
+        if(dataType.match(/playlist\/.+/)!==null){
             console.log("Playlist match")
             let d = await fetchPlaylist(dataType.split('/')[1]);
             setData(d);
         }
-        if(dataType=="journey"){
+        if(dataType==="journey"){
             let d = await getJourneyData(access_token);
             setData(d);
         }
-        if(dataType=="playlist"){
+        if(dataType==="playlist"){
             let d = await getPlaylists(access_token);
             setData(d);
         }

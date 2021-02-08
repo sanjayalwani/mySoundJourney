@@ -1,0 +1,12 @@
+.modal-body a{
+  color: #1DB954;
+  text-decoration: underline #1DB954;
+}
+
+li {
+  list-style: none;
+}
+
+button.close {
+  color: white;
+}

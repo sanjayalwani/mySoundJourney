@@ -58,7 +58,7 @@ export const getJourneyData = async (access_token) =>
             recentsFeatures = await getTrackFeatures(track_ids)
                 .then(feat => {
                     //console.log(feat);
-                    if(!recentsData) throw Error("No response 2"+recentsData);
+                    if(!recentsData) throw Error("No response 2" + recentsData);
                     else{
                         finalData = recentsData.map( (obj, idx) => {
                         return {...obj,
@@ -93,31 +93,22 @@ export const getUsername = async (access_token) =>
 
 //Loads all pages of playlists in a loop
 export const getPlaylists = async (access_token) => {
-    let returnobj;
     Spotify.setAccessToken(access_token);
-    await Spotify.getUserPlaylists().then(
-        (data) => {
-            console.log("Received: ", data);
-            returnobj = data;
-            /* let offset = 0;
-            while(returnobj.next != null){
-                offset += 50;
-                await Spotify.getUserPlaylists({'offset': offset, 'limit': 50}).then(
-                    (loopdata) => {
-                        Array.prototype.push.apply(returnobj.items, loopdata.items);
-                    },
-                    (err) => {
-                        console.error("Failed to get all playlists", err);
-                        throw Error(err);
-                    }
-                )
-            } */
-        },
-        (err) => {
-            console.error(err);
-            returnobj = {error: err}
-        }
-    );
+    let returnobj = {next: undefined, items: []};
+    let offset = 0;
+    while(returnobj===undefined || returnobj.next !== null){
+        await Spotify.getUserPlaylists({'offset': offset, 'limit': 50}).then(
+            (loopdata) => {
+                Array.prototype.push.apply(returnobj.items, loopdata.items);
+                returnobj.next = loopdata.next;
+            },
+            (err) => {
+                console.error("Failed to get all playlists", err);
+                throw Error(err);
+            }
+        )
+        offset += 50;
+    }
     
     return returnobj;
 }

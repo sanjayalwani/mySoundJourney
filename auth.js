@@ -13,7 +13,7 @@ if (process.env.NODE_ENV != "production") {
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
-const REDIRECT_URI = process.env.REDIRECT_URI; // Your redirect uri
+const { REDIRECT_URI } = process.env; // Your redirect uri
 const stateKey = "spotify_auth_state"; // This names the cookie for reference
 const accessKey = "acc_tok"; // Cookie key - Cookey
 
@@ -87,18 +87,15 @@ router.get("/callback", function (req, res) {
     request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         let access_token = body.access_token;
-        let refresh_token = body.refresh_token; //We don't use this, yet
-        res.cookie(accessKey, access_token, { maxAge: 3600000 }); //1 hour token
+        let refresh_token = body.refresh_token; // We don't use this, currently
+        res.cookie(accessKey, access_token, { maxAge: 3600000 }); // 1 hour token
         console.log("Granted cookie");
         // Now we send our tokens to an endpoint that our React app handles
-        //MUST CHANGE TO USE JAVASCRIPT WEB TOKEN FOR SECURITY, perhaps
-        res.redirect(
-          "/journey" /*+
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          })*/
-        );
+        res.redirect('/journey')
+        /* res.redirect(
+          "127.0.0.1:3000/journey"
+          // + querystring.stringify({access_token: access_token, refresh_token: refresh_token})
+        ); */
       } else {
         console.log("There was an error");
         res.redirect(

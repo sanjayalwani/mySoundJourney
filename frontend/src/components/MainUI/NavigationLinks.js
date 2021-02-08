@@ -1,22 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
+import { MDBNav } from "mdbreact";
 import './NavigationLinks.css';
 
 const NavigationLinks = props => {
-    return  (
-        <ul className="navigation-links">
-            <li>
-                <NavLink to="/journey">JOURNEY</NavLink>
-            </li>
-            <li>
-                <NavLink to="/playlist">PLAYLISTS</NavLink>
-            </li>
-            {/*<li>
-                <NavLink to="/saved">SAVED</NavLink>
-            </li>*/}
-        </ul>
-    );
+  return  (
+    <MDBNav className="navigation-links">
+      <NavLink className="py-1" to="/journey">JOURNEY</NavLink>
+      <NavLink className="py-1" to="/playlist">PLAYLISTS</NavLink>
+    </MDBNav>
+  );
 }
 
 export default NavigationLinks;

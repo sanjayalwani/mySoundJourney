@@ -7,7 +7,7 @@ Currently deployed at [mysoundjourney.herokuapp.com](http://mysoundjourney.herok
 ## Technologies
 - React
 - Node.js
-- [Spotify Web API wrapper by JMPerez](https://github.com/JMPerez/spotify-web-api-js)
+- [The Spotify Web API wrapper](https://github.com/JMPerez/spotify-web-api-js)
 - Chart.js
 
 ## Features
