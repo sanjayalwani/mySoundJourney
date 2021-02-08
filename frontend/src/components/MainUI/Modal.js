@@ -1,22 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './Modal.css'
+import { MDBModal, MDBModalHeader, MDBModalBody } from "mdbreact"
 
 const ModalContent = (props) => {
-  let content = <div />;
-  if (props.show) {
-    content = (
-      <div className="modal">
-        <span onClick={props.onCancel} className="modal-exit">X</span>
-        <header className="modal-header">
-            <h3>{props.header}</h3>
-        </header>
-        <div>{props.children}</div>
-      </div>
-    );
-  }
-
-  return ReactDOM.createPortal(content, document.getElementById('modal-hook'));
+  const { toggle, isOpen } = props;
+  return (
+    <MDBModal toggle={toggle} isOpen={isOpen} className="white-text" size="lg" centered>
+        <MDBModalHeader className="elegant-color-dark" toggle={toggle}>
+            {props.header}
+        </MDBModalHeader>
+        <MDBModalBody className="elegant-color-dark">{props.children}</MDBModalBody>
+    </MDBModal>
+  )
+  // return ReactDOM.createPortal(content, document.getElementById('modal-hook'));
 };
 
 const Backdrop = (props) => {
@@ -28,10 +25,7 @@ const Backdrop = (props) => {
 const Modal = (props) => {
   console.log("Rendering" + props.header);
   return (
-    <React.Fragment>
-      {props.show && <Backdrop onClick={props.onCancel} />}
       <ModalContent {...props} />
-    </React.Fragment>
   );
 };
 

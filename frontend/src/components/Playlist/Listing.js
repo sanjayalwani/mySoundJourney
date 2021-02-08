@@ -6,7 +6,7 @@ const PlaylistListing = (props) => {
   const [sortType, setsortType] = useState("none");
   const sortIndices = useRef({ default: [] });
 
-  if (props.playlists == undefined) {
+  if (props.playlists === undefined) {
     console.log(Object.keys(props));
     return <p>Error retrieving playlists</p>;
   }
@@ -26,7 +26,7 @@ const PlaylistListing = (props) => {
     if (column === sortState) {
       if (sortType === "none") {
         setsortType("asc");
-      } else if (sortType == "asc") {
+      } else if (sortType === "asc") {
         setsortType("desc");
       } else {
         setsortType("none");
@@ -64,7 +64,7 @@ const PlaylistListing = (props) => {
     }
   };
   let currentIndices = sortIndices.current[sortState];
-  if(sortState!=="default" && sortType==="desc"){
+  if((sortState !== "default") && (sortType === "desc")){
       //Deep copy and reverse
     currentIndices = [...sortIndices.current[sortState]]
     currentIndices = currentIndices.reverse();

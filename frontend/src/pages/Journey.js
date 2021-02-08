@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PageContainer from '../components/MainUI/PageContainer';
 import TrackTable from '../components/TrackTable/TrackTable';
 import JourneyStats from '../components/Journey/JourneyStats';
-import { AuthContext } from '../util/auth-context';
+// import { AuthContext } from '../util/auth-context';
 import { getJourneyData, getUsername } from '../controllers/spotifyShaper';
 // import SpotifyWebApi from '../util/spotify-web-api';
-import { recentTracks as DUMMY_DATA, recentTracks } from '../components/Journey/RecentTrack';
+// import { recentTracks as DUMMY_DATA, recentTracks } from '../components/Journey/RecentTrack';
 
 const Journey = props => {
     // let auth = useContext(AuthContext);
@@ -33,7 +33,7 @@ const Journey = props => {
    
     return (
       <PageContainer>
-        <h1>Overview {username? `for ${username}` : ''}</h1>
+        <h1 class="text-left w-100">Overview {username? `for ${username}` : ''}</h1>
         {data && data.length === 0 && <span> Loading ••• </span>}
         {data && data.length > 0 && <JourneyStats recent_tracks={data} />}
         <h2> Listening History </h2>

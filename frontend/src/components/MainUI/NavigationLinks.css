@@ -16,6 +16,5 @@
     .navigation-links a:active,
     .navigation-links a.active
     {
-        text-decoration: underline;
         font-weight: 700;
     }
