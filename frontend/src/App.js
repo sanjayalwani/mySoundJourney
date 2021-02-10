@@ -32,9 +32,8 @@ function App() {
 
 
   let routes;
-  //isLoggedIn=true;
+  // isLoggedIn=true;
   if( !isLoggedIn ){
-    //console.log("Checking the isLoggedIn variable");
     routes = (
       <Switch>
         <Route path="/" exact>
@@ -45,7 +44,6 @@ function App() {
     );
   }
   else {
-    //console.log("Passed the isLoggedIn variable");
     routes = (
       <Switch>
           <Route exact path="/journey" >

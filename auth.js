@@ -62,7 +62,7 @@ router.get("/callback", function (req, res) {
 
   if (state === null || state !== storedState) {
     res.redirect(
-      "/login?" +
+      "/error?" +
         querystring.stringify({
           error: "state_mismatch",
         })
@@ -91,13 +91,10 @@ router.get("/callback", function (req, res) {
         res.cookie(accessKey, access_token, { maxAge: 3600000 }); // 1 hour token
         console.log("Granted cookie");
         // Now we send our tokens to an endpoint that our React app handles
-        //MUST CHANGE TO USE JAVASCRIPT WEB TOKEN FOR SECURITY, perhaps
+        // res.redirect('/journey')
         res.redirect(
-          "127.0.0.1:3000/journey" /*+
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          })*/
+          "127.0.0.1:3000/journey"
+          // + querystring.stringify({access_token: access_token, refresh_token: refresh_token})
         );
       } else {
         console.log("There was an error");

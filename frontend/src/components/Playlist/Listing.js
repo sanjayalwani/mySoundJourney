@@ -96,7 +96,7 @@ const PlaylistListing = (props) => {
             <tr key={playlist.id}>
               <td>
                 {playlist.images.length === 0 ? (
-                  <span>no pic</span>
+                  <span>No Cover</span>
                 ) : (
                   <img
                     className="playlistImage"
@@ -106,7 +106,7 @@ const PlaylistListing = (props) => {
                 )}
               </td>
               <td>
-                <a>{playlist.name}</a>
+                <a onClick={e => console.log(playlist)}>{playlist.name}</a>
               </td>
               <td>{playlist.tracks.total}</td>
             </tr>

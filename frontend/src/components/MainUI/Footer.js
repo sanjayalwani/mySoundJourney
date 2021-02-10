@@ -24,7 +24,7 @@ const Footer = (props) => {
           <p>
             I have always been amazed at the songs recommended to me by Spotify. 
             When I dug deeper I saw that every single song has been analyzed with its every feature quantified.
-            These features include: positivity, danceability, energy, popularity, acousticness, liveness and more <a>here</a>.
+            These features include: positivity, danceability, energy, popularity, acousticness, liveness and more.
           </p>
           <p>
             With mySoundJourney I aim to visualize and analyze the numbers behind your music completely on your device to preserve your <a href="" onClick={(e)=> {e.preventDefault(); openModalK(1);}}>privacy</a> and my running costs. 
