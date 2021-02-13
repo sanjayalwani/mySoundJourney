@@ -80,16 +80,18 @@ const TrackTableRow = props => {
     
     return (
     <tr className="track-table_row">
-        <td><img src={track.album.images[2].url} alt={`Album: ${track.album.name}`}/></td>
-        <td className="track-table_track">
+        <td className="align-middle"><img src={track.album.images[2].url} alt={`Album: ${track.album.name}`}/></td>
+        <td className="align-middle">
+          <div className="track-table_track d-flex flex-column justify-content-center">
             <span className="track-table_track_name">{track.name}</span>
             <span className="track-table_track_artists">{listArtists(track.artists)}</span>
+          </div>
         </td>
-        <td className="track-table_runtime">{msToNormal(track.duration_ms)}</td>
-        <td style={{fontSize: `${popToSize(track.popularity)}em`}}>{track.popularity}</td>
-        <td style={featureStyle.energyGradient(energyGradient)}>{`${Math.round(energy*10000)/100}`}</td>
-        <td style={featureStyle.valenceGradient(valenceGradient)}>{`${Math.round(valence*10000)/100}`}</td>
-        {journey && <td className="track-table_time">{ listenTime }</td>}
+        <td className="track-table_runtime align-middle">{msToNormal(track.duration_ms)}</td>
+        <td  className="align-middle" style={{fontSize: `${popToSize(track.popularity)}em`}}>{track.popularity}</td>
+        <td  className="align-middle" style={featureStyle.energyGradient(energyGradient)}>{`${Math.round(energy*10000)/100}`}</td>
+        <td  className="align-middle" style={featureStyle.valenceGradient(valenceGradient)}>{`${Math.round(valence*10000)/100}`}</td>
+        {journey && <td className="track-table_time align-middle">{ listenTime }</td>}
     </tr>
     );
 }

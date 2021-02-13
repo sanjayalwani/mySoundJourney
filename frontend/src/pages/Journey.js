@@ -4,6 +4,7 @@ import TrackTable from '../components/TrackTable/TrackTable';
 import JourneyStats from '../components/Journey/JourneyStats';
 // import { AuthContext } from '../util/auth-context';
 import { getJourneyData, getUsername } from '../controllers/spotifyShaper';
+import LoadingIcon from '../components/MainUI/LoadingIcon';
 // import SpotifyWebApi from '../util/spotify-web-api';
 // import { recentTracks as DUMMY_DATA, recentTracks } from '../components/Journey/RecentTrack';
 
@@ -34,11 +35,14 @@ const Journey = props => {
     return (
       <PageContainer>
         <h1 className="text-left w-100">Overview {username? `for ${username}` : ''}</h1>
-        {data && data.length === 0 && <span> Loading ••• </span>}
-        {data && data.length > 0 && <JourneyStats recent_tracks={data} />}
-        <h2> Listening History </h2>
-        {data && data.length === 0 && <span> Loading ••• </span>}
-        {data && data.length > 0 && <TrackTable recent_tracks={data} journey={true} />}
+        {data && data.length === 0 && <LoadingIcon small />}
+        {data && data.length > 0 && (
+          <React.Fragment>
+            <JourneyStats recent_tracks={data} />
+            <h2> Listening History </h2>  
+            <TrackTable recent_tracks={data} journey={true} />
+          </React.Fragment>
+        )}
       </PageContainer>
     );
 }

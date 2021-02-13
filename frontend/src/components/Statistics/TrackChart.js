@@ -22,7 +22,7 @@ const TrackChart = props => {
     //Chart.js setup
     useEffect(() => {
         
-        if(trackChart.current!==undefined){
+        if(trackChart.current !== undefined){
             trackChart.current.destroy();
         }
         const ctx = document.getElementById(props.chart_id);
@@ -100,8 +100,9 @@ const TrackChart = props => {
     });
 
     return (
-        <canvas id={props.chart_id} 
-                height={window.innerWidth>700? "80px" : "120px"}>
+        <canvas 
+          id={props.chart_id}
+          height={"120px"}>
         </canvas>
     )
 }

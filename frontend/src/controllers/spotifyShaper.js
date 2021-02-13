@@ -158,7 +158,7 @@ export const getPlaylistJourney = async (access_token, playlist_id) => {
     const playlistTrackIds = playlistTracks.map(trackObj => trackObj.track.id);
 
     const playlistTrackFeatures = await getTrackFeatures(playlistTrackIds);
-
+    console.log(playlistTrackFeatures);
     const playlistJourneyData = playlistTracks.map((track, index) => ({
       ...track,
       "energy": playlistTrackFeatures[index].energy,

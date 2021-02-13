@@ -3,10 +3,10 @@ import React from 'react';
 import './Landing.css'
 
 const Landing = props => {
-    const BASE_URL = "/"
+    const BASE_URL = // '/'
     // Local development routes:
     //  document.location.href;
-    // "http://localhost:5000/";
+    'http://localhost:5000/';
 
     return(
         <div className="auth-container">

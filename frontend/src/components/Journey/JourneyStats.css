@@ -1,16 +1,49 @@
 @import "../../../node_modules/chart.js/dist/Chart.min.css";
 
-.session-title{
+/* Chart Color Definitions*/
+:scope {
+  --energy: #B91D82;
+  --positivity: #1DB954;
+  --danceability: #1D34B9;
+}
+.chart-nav button {
+  color: white;
+  box-shadow: none;
+  border-radius: 1em;
+  border-color: black;
+  border-width: 0px;
+  padding: 0.25em 1em;
+}
+.chart-nav button:hover {
+  font-weight: 600;
+}
+.chart-nav button:disabled {
+  font-weight: 600;
+}
+  .chart-nav-energy {
+    background-color: var(--energy) !important;
+  }
+  .chart-nav-positivity {
+    background-color: var(--positivity) !important;
+  }
+  .chart-nav-danceability {
+    background-color: var(--danceability) !important;
+  }
+
+.trackChart {
+
+}
+.session-title {
     display: block;
     margin: 5px;
 }
-.session-control{
+.session-control {
     display: flex;
     width: 100%;
     margin: auto;
     justify-content: center;
     }
-    .session-control-button{
+    .session-control-button {
         padding: 5px;
         width: 10em;
         margin: 1px;
@@ -23,20 +56,20 @@
         font-size: 1em;
         font-weight: 700;
     }
-    .session-control-button:hover{
+    .session-control-button:hover {
         color: #1db954;
     }
-    .session-control-button:active{
+    .session-control-button:active {
         color: #1db954;
     }
-    .session-control-button:disabled{
+    .session-control-button:disabled {
         color: #666;
     }
-    .prev-button{
+    .prev-button {
         border-top-left-radius: 1em;
         border-bottom-left-radius: 1em;
     }
-    .next-button{
+    .next-button {
         border-top-right-radius: 1em;
         border-bottom-right-radius: 1em;
     }

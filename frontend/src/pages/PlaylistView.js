@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getPlaylistJourney } from "../controllers/spotifyShaper";
-import getAccessToken from "../util/token";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getPlaylistJourney } from '../controllers/spotifyShaper';
+import getAccessToken from '../util/token';
 import TrackTable from '../components/TrackTable/TrackTable';
+import LoadingIcon from '../components/MainUI/LoadingIcon';
 
 const PlaylistView = props => {
   const access_tok = getAccessToken(document);
@@ -27,6 +28,7 @@ const PlaylistView = props => {
     if (playlistId) {
       getPlaylistJourney(access_tok, playlistId).then(data => {
         setpData(data);
+        console.log(data);
         setisLoaded(true);
       });
     }
@@ -35,7 +37,7 @@ const PlaylistView = props => {
   
   return (
     <React.Fragment>
-    {!isLoaded && <span>Playlist data is loading...</span>}
+    {!isLoaded && <LoadingIcon small/>}
     {isLoaded && (
     <div>
       <h1>{playlist.name}</h1>
