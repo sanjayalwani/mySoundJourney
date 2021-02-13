@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
-import PageContainer from "../components/MainUI/PageContainer";
-import PlaylistListing from "../components/Playlist/Listing";
-import { getPlaylists } from "../controllers/spotifyShaper";
-import getAccessToken from "../util/token"
+import React, { useState, useEffect } from 'react';
+
+// Components
+import PageContainer from '../components/MainUI/PageContainer';
+import PlaylistListing from '../components/Playlist/Listing';
+import PlaylistView from './PlaylistView';
+import LoadingIcon from '../components/MainUI/LoadingIcon';
+
+// API
+import { getPlaylists } from '../controllers/spotifyShaper';
+import getAccessToken from '../util/token'
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,9 +16,10 @@ import {
   Link,
   useRouteMatch,
   useParams
-} from "react-router-dom";
+} from 'react-router-dom';
+
 import './PlaylistListing.css';
-import PlaylistView from "./PlaylistView";
+
 
 const Playlists = props => {
   let match = useRouteMatch();
@@ -41,7 +48,7 @@ const Playlists = props => {
         </Route>
         <Route path={match.path}>
           <h1>Your Playlists</h1>
-          {!isLoaded && <span> Loading ••• </span>}
+          {!isLoaded && <LoadingIcon small />}
           
           {isLoaded && <PlaylistListing id="PList" playlists={pData.items}/>}
         </Route>

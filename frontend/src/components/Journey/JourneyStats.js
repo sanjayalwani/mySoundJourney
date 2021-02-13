@@ -1,14 +1,19 @@
 import React, { useEffect, useState} from 'react';
-//Chart.js import for comparison
+import { MDBCard, MDBCardHeader, MDBCardBody, MDBCardTitle, MDBRow, MDBCol } from 'mdbreact';
 import TrackChart from '../Statistics/TrackChart';
 import './JourneyStats.css';
-const SESSION_GAP = 5*60*1000;      //5 minutes in ms
+
+// 5 minutes in ms
+const SESSION_GAP = 5*60*1000;
+
+const chartTypeArray = ['Energy', 'Positivity', 'Danceability'];
 
 const JourneyStats = props => {
     
     let partitions = partitionSessions(props.recent_tracks);
     const time_labels = props.recent_tracks.map((val, idx) => new Date(val.played_at));
     const [currentSession, setCurrentSession] = useState(0);
+    const [currentChartType, setCurrentChartType] = useState(0);
     
     //Image initialization
     let images = [50];
@@ -35,57 +40,109 @@ const JourneyStats = props => {
     let sesh_day = sesh_start.toDateString().slice(4,11);
     let sesh_time_h = sesh_start.getHours();
     let sesh_time_m = sesh_start.getMinutes();
+    if (sesh_time_m === 60) {
+      sesh_time_h += 1;
+      sesh_time_m = 0;
+    }
     sesh_time_m = (sesh_time_m > 9)? sesh_time_m : `0${sesh_time_m}`;
-    let sesh_time = `${(sesh_time_h%12 === 0)? '12': (sesh_time_h%12)}:${sesh_time_m} ${((Math.floor(sesh_time_h/12)) ? 'PM' : 'AM')}`;
+    let sesh_time = `${(sesh_time_h%12 === 0)? '12': (sesh_time_h%12)}:${sesh_time_m} ${((Math.floor(sesh_time_h/12) % 2) ? 'PM' : 'AM')}`;
     return (
-    <React.Fragment>
-        <span className="session-title"><b>{sesh_length}</b> session on <b>{sesh_day}</b> at <b>{sesh_time}</b></span>
-        <span className="session-control">
-            <button
-             className="session-control-button prev-button" 
-             disabled={(currentSession===partitions.length-1)} 
-             onClick={() => setCurrentSession(currentSession+1)}>
-                PREVIOUS
-            </button>
-            <button 
-             className="session-control-button next-button" 
-             disabled={(currentSession===0)} 
-             onClick={() => setCurrentSession(currentSession-1)}>
-                NEXT
-            </button>
-        </span>
-        <h2>Energy Chart</h2>
-        <TrackChart tracks = {props.recent_tracks}
-                    images = {images}
-                    chart_id = {"energyChart"}
-                    feature_data = {energy_data}
-                    x_data = {time_labels}
-                    feature_label = {"Energy"}
-                    line_color = {"#B91D82"}
-                    current_slice = {partitions[currentSession]}
-        />
+      <MDBCard color="black">
+        <MDBCardHeader className="chart-nav">
+          <MDBCardTitle>Session Chart</MDBCardTitle>
+          <MDBRow>
+            <MDBCol size="4">
+              <button
+                disabled={currentChartType === 0}
+                onClick={event => {
+                  event.preventDefault();
+                  setCurrentChartType(0);
+                }}
+                className="chart-nav-energy w-100"
+              >
+                Energy
+              </button>
+            </MDBCol>
+            <MDBCol size="4">
+              <button
+                disabled={currentChartType === 1}
+                onClick={event => {
+                  event.preventDefault();
+                  setCurrentChartType(1);
+                }}
+                className="chart-nav-positivity w-100"
+              >
+                Positivity
+              </button>
+            </MDBCol>
+            <MDBCol size="4">
+              <button
+                disabled={currentChartType === 2}
+                onClick={event => {
+                  event.preventDefault();
+                  setCurrentChartType(2);
+                }}
+                className="chart-nav-danceability w-100"
+              >
+                Danceability
+              </button>
+            </MDBCol>
+          </MDBRow>
+        </MDBCardHeader>
+        <MDBCardBody>
+          <span className="session-title"><b>{sesh_length}</b> session on <b>{sesh_day}</b> at <b>{sesh_time}</b></span>
+          <span className="session-control">
+              <button
+              className="session-control-button prev-button" 
+              disabled={(currentSession===partitions.length-1)} 
+              onClick={() => setCurrentSession(currentSession+1)}>
+                  PREVIOUS
+              </button>
+              <button 
+              className="session-control-button next-button" 
+              disabled={(currentSession===0)} 
+              onClick={() => setCurrentSession(currentSession-1)}>
+                  NEXT
+              </button>
+          </span>
+          <div className="w-100">
+            {(currentChartType === 0) && (
+            <TrackChart tracks = {props.recent_tracks}
+                        images = {images}
+                        chart_id = {"energyChart"}
+                        feature_data = {energy_data}
+                        x_data = {time_labels}
+                        feature_label = {"Energy"}
+                        line_color = {"#B91D82"}
+                        current_slice = {partitions[currentSession]}
+            />
+            )}
 
-        <h2>Positivity Chart</h2>
-        <TrackChart tracks = {props.recent_tracks}
-                    images = {images}
-                    chart_id = {"valenceChart"}
-                    feature_data = {valence_data}
-                    x_data = {time_labels}
-                    feature_label = {"Positivity"}
-                    line_color = {"#1DB954"}
-                    current_slice = {partitions[currentSession]}
-        />
-        <h2>Danceability Chart</h2>
-        <TrackChart tracks = {props.recent_tracks}
-                    images = {images}
-                    chart_id = {"danceabilityChart"}
-                    feature_data = {danceability_data}
-                    x_data = {time_labels}
-                    feature_label = {"Danceability"}
-                    line_color = {"#1D34B9"}
-                    current_slice = {partitions[currentSession]}
-        />
-    </React.Fragment>
+            {(currentChartType === 1) && (
+            <TrackChart tracks = {props.recent_tracks}
+                        images = {images}
+                        chart_id = {"valenceChart"}
+                        feature_data = {valence_data}
+                        x_data = {time_labels}
+                        feature_label = {"Positivity"}
+                        line_color = {"#1DB954"}
+                        current_slice = {partitions[currentSession]}
+            />
+            )}
+            {(currentChartType === 2) && (
+            <TrackChart tracks = {props.recent_tracks}
+                        images = {images}
+                        chart_id = {"danceabilityChart"}
+                        feature_data = {danceability_data}
+                        x_data = {time_labels}
+                        feature_label = {"Danceability"}
+                        line_color = {"#1D34B9"}
+                        current_slice = {partitions[currentSession]}
+            />
+            )}
+          </div>
+        </MDBCardBody>
+    </MDBCard>
     );
 }
 

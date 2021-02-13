@@ -1,5 +1,6 @@
 import React from 'react';
 import TrackTableRow from './TrackTableRow';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import './TrackTable.css';
 
 const percentColor = (percentage) => {
@@ -156,8 +157,8 @@ const TrackTable = props => {
     const featureGradients = advancedFeatureGradientMapper(recent_tracks);
 
     return (
-      <table className="track-table">
-        <thead>
+      <MDBTable responsive borderless className="track-table text-white">
+        <MDBTableHead>
           <tr>
             <th title="Track cover"></th>
             <th title="Track name and artist(s)">Track</th>
@@ -167,14 +168,14 @@ const TrackTable = props => {
             <th><span className="track-table_positivity" title="Positivity out of 100">Positivity</span></th>
             {journey && <th className="track-table_time" title="When you listened to this track">Played at</th>}
           </tr>
-        </thead>
-        <tbody>
+        </MDBTableHead>
+        <MDBTableBody>
           {recent_tracks && recent_tracks.map((trackObj, index) => {
             return (<TrackTableRow trackObject={trackObj} key={index} journey={journey} gradient={featureGradients[index]} />);
           })}
-          {(!recent_tracks || recent_tracks.length === 0) && <tr><td>No tracks found.</td></tr>}
-        </tbody>
-      </table>
+          {!recent_tracks && <tr><td>No tracks found.</td></tr>}
+        </MDBTableBody>
+      </MDBTable>
   );
 
 }
