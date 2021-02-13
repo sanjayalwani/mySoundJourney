@@ -5,7 +5,7 @@ import Modal from './Modal';
 const Footer = (props) => {
   //Bit order <-> Display order (Right-to-left)
   const [modalBits, setmodalBits] = useState(0);
-	console.log(modalBits);
+
   const openModalK = (kthbit) => {
     setmodalBits(2 ** kthbit);
   };

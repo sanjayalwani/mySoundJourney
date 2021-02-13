@@ -49,15 +49,12 @@ function App() {
           <Route exact path="/journey" >
             <Journey />
           </Route>
-          <Route exact path="/playlist" >
+          <Route path="/playlist" >
             <Playlists />
           </Route>
-          <Route path="/playlist/:id" >
-            
-          </Route>
-          <Route path="/dev/api" >
+          {/* <Route path="/dev/api" >
             <API />
-          </Route>
+          </Route> */}
           <Redirect to="/journey" />
       </Switch>
     );

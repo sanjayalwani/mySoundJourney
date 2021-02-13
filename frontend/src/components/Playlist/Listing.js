@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
+import { useHistory , Link} from "react-router-dom";
 
 const PlaylistListing = (props) => {
   //3 cycle toggle default -> ascend -> descend -> default
   const [sortState, setsortState] = useState("default");
   const [sortType, setsortType] = useState("none");
   const sortIndices = useRef({ default: [] });
-
+  const history = useHistory();
   if (props.playlists === undefined) {
     console.log(Object.keys(props));
     return <p>Error retrieving playlists</p>;
@@ -106,7 +107,7 @@ const PlaylistListing = (props) => {
                 )}
               </td>
               <td>
-                <a onClick={e => console.log(playlist)}>{playlist.name}</a>
+                <Link to={`playlist/${playlist.id}`}>{playlist.name}</Link>
               </td>
               <td>{playlist.tracks.total}</td>
             </tr>

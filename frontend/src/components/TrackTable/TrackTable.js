@@ -172,7 +172,7 @@ const TrackTable = props => {
           {recent_tracks && recent_tracks.map((trackObj, index) => {
             return (<TrackTableRow trackObject={trackObj} key={index} journey={journey} gradient={featureGradients[index]} />);
           })}
-          {!recent_tracks && <tr><td>No tracks found.</td></tr>}
+          {(!recent_tracks || recent_tracks.length === 0) && <tr><td>No tracks found.</td></tr>}
         </tbody>
       </table>
   );

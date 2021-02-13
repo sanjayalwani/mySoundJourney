@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 
+// Does not work, causes crashes I believe
+
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }

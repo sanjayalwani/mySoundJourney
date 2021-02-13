@@ -113,9 +113,9 @@ export const getPlaylists = async (access_token) => {
     return returnobj;
 }
 
-export const fetchPlaylist = async (access_token, playlist_id) => {
+export const fetchPlaylist = async (playlist_id) => {
     let returnobj;
-    Spotify.setAccessToken(access_token);
+
     await Spotify.getPlaylist(playlist_id).then(
         (data) => {
             returnobj = data;
@@ -126,4 +126,48 @@ export const fetchPlaylist = async (access_token, playlist_id) => {
         }
     );
     return returnobj;
+}
+
+export const fetchPlaylistTracks = async (playlist_id, num_tracks) => {
+  let trackPromises = [];
+  let playlistTracks = [];
+  for (let batch = 0; batch < num_tracks; batch += 100) {
+    trackPromises.push(Spotify.getPlaylistTracks(playlist_id, { offset: batch }));
+  }
+  await Promise.all(trackPromises)
+    .then(trackBatchArrays => {
+      trackBatchArrays.forEach( trackBatch => {
+        Array.prototype.push.apply(playlistTracks, trackBatch.items);
+      })
+    })
+    .catch(err => {
+      throw new Error(err);
+    })
+
+  return playlistTracks;
+}
+
+export const getPlaylistJourney = async (access_token, playlist_id) => {
+  Spotify.setAccessToken(access_token);
+  
+  try {
+    const playlist = await fetchPlaylist(playlist_id);
+
+    const playlistTracks = await fetchPlaylistTracks(playlist_id, playlist.tracks.total);
+
+    const playlistTrackIds = playlistTracks.map(trackObj => trackObj.track.id);
+
+    const playlistTrackFeatures = await getTrackFeatures(playlistTrackIds);
+
+    const playlistJourneyData = playlistTracks.map((track, index) => ({
+      ...track,
+      "energy": playlistTrackFeatures[index].energy,
+      "valence": playlistTrackFeatures[index].valence,
+      "danceability": playlistTrackFeatures[index].danceability
+    }))
+    return { playlist, playlistJourneyData };
+  } catch (err) {
+    return new Error(err)
+  }
+
 }

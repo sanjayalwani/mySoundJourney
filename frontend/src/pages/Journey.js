@@ -33,7 +33,7 @@ const Journey = props => {
    
     return (
       <PageContainer>
-        <h1 class="text-left w-100">Overview {username? `for ${username}` : ''}</h1>
+        <h1 className="text-left w-100">Overview {username? `for ${username}` : ''}</h1>
         {data && data.length === 0 && <span> Loading ••• </span>}
         {data && data.length > 0 && <JourneyStats recent_tracks={data} />}
         <h2> Listening History </h2>

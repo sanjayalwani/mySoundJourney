@@ -91,11 +91,11 @@ router.get("/callback", function (req, res) {
         res.cookie(accessKey, access_token, { maxAge: 3600000 }); // 1 hour token
         console.log("Granted cookie");
         // Now we send our tokens to an endpoint that our React app handles
-        // res.redirect('/journey')
-        res.redirect(
+        res.redirect('/journey')
+        /* res.redirect(
           "127.0.0.1:3000/journey"
           // + querystring.stringify({access_token: access_token, refresh_token: refresh_token})
-        );
+        ); */
       } else {
         console.log("There was an error");
         res.redirect(
