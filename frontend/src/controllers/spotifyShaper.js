@@ -15,6 +15,30 @@ const fetchRecents = async () =>
     return returnobj;
 }
 
+/*
+const fetchRecentsRecursively = async (before, countDown = 2) => 
+{
+  if (counter === maxCount) return [];
+  console.log(counter);
+  let items;
+  await Spotify.getMyRecentlyPlayedTracks({ before, limit: 50 }).then(
+    async (data) => {
+      console.log({limit: 50, offset: counter * 50})
+      items = data.items;
+      if(data.next) {
+        let nextItems = await(fetchRecents(counter + 1));
+        console.log(nextItems)
+        items = items.concat(nextItems);
+      }
+    },
+    (err) => {
+      console.error(err);
+    }
+  );
+  return items;
+}
+ */
+
 const getTrackFeatures = async (track_ids) => 
 {
     let returnobj;
@@ -113,9 +137,9 @@ export const getPlaylists = async (access_token) => {
     return returnobj;
 }
 
-export const fetchPlaylist = async (playlist_id) => {
+export const fetchPlaylist = async (playlist_id, access_token) => {
     let returnobj;
-
+    if (access_token) Spotify.setAccessToken(access_token);
     await Spotify.getPlaylist(playlist_id).then(
         (data) => {
             returnobj = data;
@@ -159,12 +183,14 @@ export const getPlaylistJourney = async (access_token, playlist_id) => {
 
     const playlistTrackFeatures = await getTrackFeatures(playlistTrackIds);
     console.log(playlistTrackFeatures);
-    const playlistJourneyData = playlistTracks.map((track, index) => ({
-      ...track,
-      "energy": playlistTrackFeatures[index].energy,
-      "valence": playlistTrackFeatures[index].valence,
-      "danceability": playlistTrackFeatures[index].danceability
-    }))
+    const playlistJourneyData = playlistTracks.map((track, index) => {
+      return track && {
+        ...track,
+        "energy": playlistTrackFeatures[index] && playlistTrackFeatures[index].energy,
+        "valence": playlistTrackFeatures[index] && playlistTrackFeatures[index].valence,
+        "danceability": playlistTrackFeatures[index] && playlistTrackFeatures[index].danceability
+      }
+    })
     return { playlist, playlistJourneyData };
   } catch (err) {
     return new Error(err)

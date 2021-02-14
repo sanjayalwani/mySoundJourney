@@ -14,7 +14,7 @@ const API = props => {
     useEffect(() => { (async () => {
         if(dataType.match(/playlist\/.+/)!==null){
             console.log("Playlist match")
-            let d = await fetchPlaylist(dataType.split('/')[1]);
+            let d = await fetchPlaylist(dataType.split('/')[1], access_token);
             setData(d);
         }
         if(dataType==="journey"){

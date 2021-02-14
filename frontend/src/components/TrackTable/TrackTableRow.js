@@ -78,9 +78,10 @@ const TrackTableRow = props => {
       listenTime = `${listen_date.toDateString().slice(4,11)} ${listen_date.toLocaleTimeString('en-US')}`;
     }
     
+    const { images } = track.album;
     return (
     <tr className="track-table_row">
-        <td className="align-middle"><img src={track.album.images[2].url} alt={`Album: ${track.album.name}`}/></td>
+        <td className="align-middle"><img src={images && images.length && images[images.length - 1].url} alt={`Album: ${track.album.name}`}/></td>
         <td className="align-middle">
           <div className="track-table_track d-flex flex-column justify-content-center">
             <span className="track-table_track_name">{track.name}</span>
