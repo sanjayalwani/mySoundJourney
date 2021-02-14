@@ -23,7 +23,6 @@ const Backdrop = (props) => {
   );
 };
 const Modal = (props) => {
-  console.log("Rendering" + props.header);
   return (
       <ModalContent {...props} />
   );

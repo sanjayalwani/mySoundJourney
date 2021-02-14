@@ -81,7 +81,7 @@ const TrackTableRow = props => {
     const { images } = track.album;
     return (
     <tr className="track-table_row">
-        <td className="align-middle"><img src={images && images.length && images[images.length - 1].url} alt={`Album: ${track.album.name}`}/></td>
+        <td className="align-middle"><img src={(images && images.length && images[images.length - 1].url) || "/msjspiral.png"} alt={`Album: ${track.album.name}`}/></td>
         <td className="align-middle">
           <div className="track-table_track d-flex flex-column justify-content-center">
             <span className="track-table_track_name">{track.name}</span>
