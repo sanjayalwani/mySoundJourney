@@ -17,7 +17,7 @@ const Footer = (props) => {
     <React.Fragment>
       <Modal
         header="About"
-        isOpen={modalBits & 0b1}
+        isOpen={Boolean(modalBits & 0b1)}
         toggle={closeModals}
       >
         <div>
@@ -37,7 +37,7 @@ const Footer = (props) => {
 
       <Modal
         header="Privacy"
-        isOpen={modalBits & 0b10}
+        isOpen={Boolean(modalBits & 0b10)}
         toggle={closeModals}
       >
         <div>
