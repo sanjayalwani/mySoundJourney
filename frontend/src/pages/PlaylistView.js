@@ -19,7 +19,10 @@ const PlaylistView = props => {
   //   });
   // }, []);
 
-  const [playlistData, setpData] = useState({playlist: null, playlistJourneyData: null})
+  const [playlistData, setpData] = useState({
+    playlist: null,
+    playlistJourneyData: null
+  })
   const [isLoaded, setisLoaded] = useState(false);
 
   // Load playlists
@@ -33,6 +36,8 @@ const PlaylistView = props => {
       });
     }
   }, []);
+
+  console.log(playlistData)
   const { playlist, playlistJourneyData } = playlistData;
   
   return (
@@ -40,9 +45,9 @@ const PlaylistView = props => {
     {!isLoaded && <LoadingIcon small/>}
     {isLoaded && (
     <div>
-      <h1>{playlist.name}</h1>
+      <h1>{playlist && playlist.name}</h1>
       
-      {isLoaded && <TrackTable recent_tracks={playlistJourneyData} journey={false} />}
+      {isLoaded && playlistJourneyData && <TrackTable recent_tracks={playlistJourneyData} journey={false} />}
     </div>
     )}
     </React.Fragment>
