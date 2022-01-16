@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const request = require("request"); // "Request" library
+const request = require("request");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
 
-//Environment variables for local testing To Be Removed when pushing to Heroku
+// Environment variables for local testing To Be Removed when pushing to Heroku
 if (process.env.NODE_ENV != "production") {
   console.log(`Not in production: in ${process.env.NODE_ENV || "local dev"}`);
   const env = require("dotenv");
@@ -11,11 +11,12 @@ if (process.env.NODE_ENV != "production") {
   if (env.error) throw env.error;
 }
 
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID; // Your client id
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
-const { REDIRECT_URI } = process.env; // Your redirect uri
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;         // Spotify client id
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET; // Spotify client secret
+const { REDIRECT_URI } = process.env;                    // App redirect uri (should match one registered with spotify)
+
 const stateKey = "spotify_auth_state"; // This names the cookie for reference
-const accessKey = "acc_tok"; // Cookie key - Cookey
+const accessKey = "acc_tok"; // Cookie key
 
 const router = Router();
 
@@ -61,52 +62,52 @@ router.get("/callback", function (req, res) {
   var storedState = req.cookies ? req.cookies[stateKey] : null;
 
   if (state === null || state !== storedState) {
-    res.redirect(
+    return res.redirect(
       "/error?" +
         querystring.stringify({
           error: "state_mismatch",
         })
     );
-  } else {
-    res.clearCookie(stateKey);
-    var authOptions = {
-      url: "https://accounts.spotify.com/api/token",
-      form: {
-        code: code,
-        redirect_uri: REDIRECT_URI,
-        grant_type: "authorization_code",
-      },
-      headers: {
-        Authorization:
-          "Basic " +
-          Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
-      },
-      json: true,
-    };
-    console.log("Posting now");
-    request.post(authOptions, function (error, response, body) {
-      if (!error && response.statusCode === 200) {
-        let access_token = body.access_token;
-        let refresh_token = body.refresh_token; // We don't use this, currently
-        res.cookie(accessKey, access_token, { maxAge: 3600000 }); // 1 hour token
-        console.log("Granted cookie");
-        // Now we send our tokens to an endpoint that our React app handles
-        res.redirect('/journey')
-        /* res.redirect(
-          "127.0.0.1:3000/journey"
-          // + querystring.stringify({access_token: access_token, refresh_token: refresh_token})
-        ); */
-      } else {
-        console.log("There was an error");
-        res.redirect(
-          "/error?" +
-            querystring.stringify({
-              error: "invalid_token",
-            })
-        );
-      }
-    });
   }
+
+  res.clearCookie(stateKey);
+  var authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    form: {
+      code: code,
+      redirect_uri: REDIRECT_URI,
+      grant_type: "authorization_code",
+    },
+    headers: {
+      Authorization:
+        "Basic " +
+        Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
+    },
+    json: true,
+  };
+  console.log("Posting now");
+  request.post(authOptions, function (error, response, body) {
+    if (error || response.statusCode != 200) {
+      console.log("There was an error");
+      res.redirect(
+        "/error?" +
+          querystring.stringify({
+            error: "invalid_token",
+          })
+      );
+    }
+    let access_token = body.access_token;
+    let refresh_token = body.refresh_token; // We don't use this, currently
+    res.cookie(accessKey, access_token, { maxAge: 3600000 }); // 1 hour token
+    console.log("Granted cookie");
+    // Now we send our tokens to an endpoint that our React app handles
+    res.redirect('/journey')
+    /* res.redirect(
+      "127.0.0.1:3000/journey"
+      // + querystring.stringify({access_token: access_token, refresh_token: refresh_token})
+    ); */
+  });
+
 });
 
 /**
