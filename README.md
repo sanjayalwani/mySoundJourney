@@ -2,7 +2,7 @@
 
 A React powered web application that let's you get in tune with yourself with inspiring insights and visualizations.
 
-Currently deployed at [mysoundjourney.herokuapp.com](http://mysoundjourney.herokuapp.com/)
+> Currently working on migrating the application from Heroku to AWS.
 
 ## Technologies
 - React
