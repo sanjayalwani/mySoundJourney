@@ -8,7 +8,6 @@ import LoadingIcon from '../components/MainUI/LoadingIcon';
 
 // API
 import { getPlaylists } from '../controllers/spotifyShaper';
-import getAccessToken from '../util/token'
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,18 +16,21 @@ import {
   useRouteMatch,
   useParams
 } from 'react-router-dom';
+import { useAuth } from '../util/auth';
 
 import './PlaylistListing.css';
 
+// TODO: pagination of playlists + fix error n.track.totals undefined.
 
-const Playlists = props => {
-  let match = useRouteMatch();
-  let { playlistId } = useParams();
-  let access_tok = getAccessToken(document);
-  const playlistPromise = getPlaylists(access_tok);
+const Playlists = (props) => {
+  const match = useRouteMatch();
+  const { playlistId } = useParams();
+  const { accessToken } = useAuth();
+  const playlistPromise = getPlaylists(accessToken);
   
   const [pData, setpData] = useState(null)
   const [isLoaded, setisLoaded] = useState(false);
+  
   // Load playlists
   useEffect(() => {
     console.log(playlistId);
