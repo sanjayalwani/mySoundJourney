@@ -3,7 +3,7 @@ const request = require("request");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
 
-// Environment variables for local testing To Be Removed when pushing to Heroku
+// Load local .env file if not in cloud environment
 if (process.env.NODE_ENV != "production") {
   console.log(`Not in production: in ${process.env.NODE_ENV || "local dev"}`);
   const env = require("dotenv");
@@ -11,9 +11,7 @@ if (process.env.NODE_ENV != "production") {
   if (env.error) throw env.error;
 }
 
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;         // Spotify client id
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET; // Spotify client secret
-const { REDIRECT_URI } = process.env;                    // App redirect uri (should match one registered with spotify)
+const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, REDIRECT_URI } = process.env;                    // App redirect uri (should match one registered with spotify)
 
 const stateKey = "spotify_auth_state"; // This names the cookie for reference
 const accessKey = "acc_tok"; // Cookie key
@@ -39,7 +37,7 @@ router.get("/login", function (req, res) {
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
         response_type: "code",
-        client_id: CLIENT_ID,
+        client_id: SPOTIFY_CLIENT_ID,
         scope: scope,
         redirect_uri: REDIRECT_URI,
         state: state,
@@ -81,7 +79,7 @@ router.get("/callback", function (req, res) {
     headers: {
       Authorization:
         "Basic " +
-        Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
+        Buffer.from(SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET).toString("base64"),
     },
     json: true,
   };
