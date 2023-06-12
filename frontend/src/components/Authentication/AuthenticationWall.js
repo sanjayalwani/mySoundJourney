@@ -4,6 +4,7 @@ import { useAuth } from '../../util/auth';
 
 function AuthenticationWall({ children, redirectTo }) {
     const currentAuthContext = useAuth();
+    
     return currentAuthContext['isLoggedIn'] ? children : <Redirect to={redirectTo} />;
 }
 

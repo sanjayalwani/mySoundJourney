@@ -9,6 +9,7 @@
     "axios": "^0.21.2",
     "chart.js": "^2.9.4",
     "jquery": "^3.5.1",
+    "js-cookie": "^3.0.5",
     "mdbreact": "^5.2.0",
     "react": "17.0.1",
     "react-chartjs-2": "^2.10.0",

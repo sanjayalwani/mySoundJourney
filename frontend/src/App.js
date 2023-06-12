@@ -7,6 +7,7 @@ import Footer from './components/MainUI/Footer';
 import Journey from './pages/Journey';
 import Playlists from './pages/PlaylistListing';
 import API from './pages/dev/API'
+import ErrorPage from './pages/ErrorPage';
 import AuthenticationWall from './components/Authentication/AuthenticationWall';
 import AuthConfirmation from './pages/AuthConfirmation';
 import { useAuth, AuthProvider } from "./util/auth";
@@ -35,6 +36,9 @@ const Routes = () => {
           <AuthenticationWall redirectTo="/">
             <Playlists />
           </AuthenticationWall>
+        </Route>
+        <Route path="/error" >
+          <ErrorPage />
         </Route>
         {/* <Route path="/dev/api" >
           <API />
