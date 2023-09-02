@@ -1,11 +1,6 @@
 import React from 'react';
 
-const msToNormal = (milliseconds) => {
-    let seconds = milliseconds/1000;
-    let minutes = Math.floor(seconds/60);
-    seconds = Math.floor(seconds%60);
-    return `${minutes}:${seconds<10? `0${seconds}`: seconds}`;
-}
+import { msToTrackLength } from '../../util/helpers';
 
 const popToSize = (popularity) => {
     let denominator = (window.innerWidth<700)? 110 : 80;
@@ -88,10 +83,10 @@ const TrackTableRow = props => {
             <span className="track-table_track_artists">{listArtists(track.artists)}</span>
           </div>
         </td>
-        <td className="track-table_runtime align-middle">{msToNormal(track.duration_ms)}</td>
+        <td className="track-table_runtime align-middle">{msToTrackLength(track.duration_ms)}</td>
         <td  className="align-middle" style={{fontSize: `${popToSize(track.popularity)}em`}}>{track.popularity}</td>
-        <td  className="align-middle" style={featureStyle.energyGradient(energyGradient)}>{`${Math.round(energy*10000)/100}`}</td>
-        <td  className="align-middle" style={featureStyle.valenceGradient(valenceGradient)}>{`${Math.round(valence*10000)/100}`}</td>
+        <td  className="align-middle" style={featureStyle.energy(energy)}>{`${(energy*100).toFixed()}`}</td>
+        <td  className="align-middle" style={featureStyle.valence(valence)}>{`${(valence*100).toFixed()}`}</td>
         {journey && <td className="track-table_time align-middle">{ listenTime }</td>}
     </tr>
     );
