@@ -5,7 +5,7 @@ import Navigation from './components/MainUI/Navigation';
 import Landing from './pages/Landing';
 import Footer from './components/MainUI/Footer';
 import Journey from './pages/Journey';
-import Playlists from './pages/PlaylistListing';
+import Playlists from './pages/Playlists';
 import API from './pages/dev/API'
 import ErrorPage from './pages/ErrorPage';
 import AuthenticationWall from './components/Authentication/AuthenticationWall';
@@ -43,7 +43,7 @@ const Routes = () => {
         {/* <Route path="/dev/api" >
           <API />
         </Route> */}
-        <Redirect to={isLoggedIn ? '/journey' : '/'} />
+        <Redirect to='/' />
       </Switch>
     </main>
     <Footer />

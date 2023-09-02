@@ -102,6 +102,7 @@ const TrackChart = props => {
     return (
         <canvas 
           id={props.chart_id}
+          className='trackChart'
           height={"120px"}>
         </canvas>
     )

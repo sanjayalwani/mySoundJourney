@@ -115,26 +115,25 @@ export const getUsername = async (access_token) =>
     return returnobj;
 }
 
-//Loads all pages of playlists in a loop
-export const getPlaylists = async (access_token) => {
+// Loads all pages of playlists in a loop
+export const getPlaylists = async (access_token, offset, limit) => {
     Spotify.setAccessToken(access_token);
-    let returnobj = {next: undefined, items: []};
-    let offset = 0;
-    while(returnobj===undefined || returnobj.next !== null){
-        await Spotify.getUserPlaylists({'offset': offset, 'limit': 50}).then(
-            (loopdata) => {
-                Array.prototype.push.apply(returnobj.items, loopdata.items);
-                returnobj.next = loopdata.next;
-            },
-            (err) => {
-                console.error("Failed to get all playlists", err);
-                throw Error(err);
-            }
-        )
-        offset += 50;
-    }
+
+    let currPlaylists = {previous: null, next: null, items: []};
+
+    await Spotify.getUserPlaylists({'offset': offset, 'limit': limit}).then(
+        (pData) => {
+            Array.prototype.push.apply(currPlaylists.items, pData.items);
+            currPlaylists.previous = pData.previous;
+            currPlaylists.next = pData.next;
+        },
+        (err) => {
+            console.error("Failed to get all playlists", err);
+            throw Error(err);
+        }
+    )
     
-    return returnobj;
+    return currPlaylists;
 }
 
 export const fetchPlaylist = async (playlist_id, access_token) => {

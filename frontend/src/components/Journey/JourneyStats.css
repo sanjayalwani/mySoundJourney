@@ -31,7 +31,7 @@
   }
 
 .trackChart {
-
+  height: 120px;
 }
 .session-title {
     display: block;
