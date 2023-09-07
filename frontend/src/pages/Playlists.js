@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 // Components
 import PageContainer from '../components/MainUI/PageContainer';
-import PlaylistListing from '../components/Playlist/Listing';
-import PlaylistView from './PlaylistView';
+import PlaylistListing from '../components/Playlist/PlaylistListing';
+import PlaylistView from '../components/Playlist/PlaylistView';
 
 // API
 import {

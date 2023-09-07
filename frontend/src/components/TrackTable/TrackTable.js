@@ -163,9 +163,9 @@ const TrackTable = props => {
             <th title="Track cover"></th>
             <th title="Track name and artist(s)">Track</th>
             <th className="track-table_runtime" title="Length in minutes:seconds"><span>Length</span></th>
-            <th><span className="track-table_popularity" title="Popularity out of 100">Popularity</span></th>
-            <th><span className="track-table_energy" title="Energy out of 100">Energy</span></th>
-            <th><span className="track-table_positivity" title="Positivity out of 100">Positivity</span></th>
+            <th><span className="track-table_popularity" title="Popularity out of 100">Popularity (%)</span></th>
+            <th><span className="track-table_energy" title="Energy out of 100">Energy (%)</span></th>
+            <th><span className="track-table_positivity" title="Positivity out of 100">Positivity (%)</span></th>
             {journey && <th className="track-table_time" title="When you listened to this track">Played at</th>}
           </tr>
         </MDBTableHead>

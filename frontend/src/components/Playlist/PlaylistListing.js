@@ -5,7 +5,7 @@ import LoadingIcon from '../MainUI/LoadingIcon';
 import { getPlaylists } from '../../controllers/spotifyShaper';
 import { useAuth } from '../../util/auth';
 
-import './Listing.css';
+import './PlaylistListing.css';
 
 const PlaylistListing = () => {
   // Pagination code

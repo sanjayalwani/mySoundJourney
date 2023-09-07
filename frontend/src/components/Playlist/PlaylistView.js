@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPlaylistJourney } from '../controllers/spotifyShaper';
-import getAccessToken from '../util/token';
-import TrackTable from '../components/TrackTable/TrackTable';
-import LoadingIcon from '../components/MainUI/LoadingIcon';
+
+import { getPlaylistJourney } from '../../controllers/spotifyShaper';
+import { useAuth } from '../../util/auth';
+import TrackTable from '../TrackTable/TrackTable';
+import LoadingIcon from '../MainUI/LoadingIcon';
 
 const PlaylistView = props => {
-  const access_tok = getAccessToken(document);
-  let { playlistId } = useParams();
-  // const playlistPromise = getPlaylists(access_tok);
+  const { accessToken } = useAuth();
+
+  const { playlistId } = useParams();
+
+  // const playlistPromise = getPlaylists(accessToken);
   
   // const [pData, setpData] = useState(null)
   // const [isLoaded, setisLoaded] = useState(false);
@@ -29,7 +32,7 @@ const PlaylistView = props => {
   useEffect(() => {
     console.log(playlistId);
     if (playlistId) {
-      getPlaylistJourney(access_tok, playlistId).then(data => {
+      getPlaylistJourney(accessToken, playlistId).then(data => {
         setpData(data);
         console.log(data);
         setisLoaded(true);
@@ -45,7 +48,7 @@ const PlaylistView = props => {
     {!isLoaded && <LoadingIcon small/>}
     {isLoaded && (
     <div>
-      <h1>{playlist && playlist.name}</h1>
+      <h1>{playlist ? playlist.name : "error loading"}</h1>
       
       {isLoaded && playlistJourneyData && <TrackTable recent_tracks={playlistJourneyData} journey={false} />}
     </div>
