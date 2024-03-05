@@ -1,4 +1,4 @@
-import SpotifyWebApi from '../util/spotify-web-api';
+import SpotifyWebApi from 'spotify-web-api-js';
 const Spotify = new SpotifyWebApi();
 
 const fetchRecents = async () => 
@@ -52,12 +52,11 @@ const getTrackFeatures = async (track_ids) =>
     );
     return returnobj;
 }
-let getJourneyDataGate = false;
 
 export const getJourneyData = async (access_token) =>
 {
     let finalData;
-    if(!getJourneyDataGate){
+
     Spotify.setAccessToken(access_token);
     let track_ids;
     let recentsData;
@@ -96,7 +95,7 @@ export const getJourneyData = async (access_token) =>
         }
         )
         .catch((err)=> console.error(err));
-    }
+
     return finalData;
 }
 

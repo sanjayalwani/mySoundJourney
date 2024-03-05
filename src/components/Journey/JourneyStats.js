@@ -1,55 +1,65 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBCardTitle, MDBRow, MDBCol } from 'mdbreact';
+
+import { getSessionInfo } from '../../util/helpers';
 import TrackChart from '../Statistics/TrackChart';
+import Chart from 'chart.js';
+
 import './JourneyStats.css';
+import PieChart from '../Statistics/PieChart';
+import TripletColorDisplay from '../TrackTable/TripletColorDisplay';
+
+
 
 // 5 minutes in ms
 const SESSION_GAP = 5*60*1000;
 
-const chartTypeArray = ['Energy', 'Positivity', 'Danceability'];
+const chartTypeNames = ['Energy', 'Positivity', 'Danceability'];
+const chartTypeColors = ['#B91D82', '#1DB954', '#1D34B9'];
 
 const JourneyStats = props => {
     
-    let partitions = partitionSessions(props.recent_tracks);
-    const time_labels = props.recent_tracks.map((val, idx) => new Date(val.played_at));
-    const [currentSession, setCurrentSession] = useState(0);
-    const [currentChartType, setCurrentChartType] = useState(0);
-    
-    //Image initialization
-    let images = [50];
-    props.recent_tracks.map((val, idx) => {
-        if(window.innerWidth>1000){
-            images[idx] = new Image(30, 30);
-        } else if(window.innerWidth>700){
-            images[idx] = new Image(21, 21);
+  const { recent_tracks } = props;
+
+  const partitions = partitionSessions(recent_tracks);
+  const time_labels = recent_tracks.map((val) => new Date(val.played_at));
+  const [currentSession, setCurrentSession] = useState(0);
+  const [currentChartType, setCurrentChartType] = useState(0);
+
+  // Image initialization
+  let images = recent_tracks.map((val) => {
+        let img;
+        if(window.innerWidth > 1000){
+            img = new Image(30, 30);
+        } else if(window.innerWidth > 700){
+            img = new Image(21, 21);
         } else {
-            images[idx] = new Image(14, 14);
+            img = new Image(14, 14);
         }
-        images[idx].src = val.track.album.images[2].url;
-        images[idx].border = "solid 1px green;";
-        images[idx].borderRadius = "50%";
+        img.src = val.track.album.images[2].url;
+        img.style.border = "solid 1px green";
+        img.style.borderRadius = "50%";
+        return img;
     })
 
-    const energy_data = props.recent_tracks.map((val, idx) => (100*val.energy));
-    const valence_data = props.recent_tracks.map((val, idx) => (100*val.valence));
-    const danceability_data = props.recent_tracks.map((val, idx) => (100*val.danceability));
+    const energy_data = recent_tracks.map((track) => (100 * track.energy));
+    const valence_data = recent_tracks.map((track) => (100 * track.valence));
+    const danceability_data = recent_tracks.map((track) => (100 * track.danceability));
+    const chartTypeData = [energy_data, valence_data, danceability_data];
+    
+    const { sesh_length, sesh_day, sesh_time } = getSessionInfo(time_labels, partitions, currentSession, recent_tracks);
+    
+    // Calculate averages and trends for current session
+    const session_tracks = recent_tracks.slice(partitions[currentSession][0], partitions[currentSession][1]);
 
-    let sesh_start = time_labels[partitions[currentSession][1] -1];
-    let sesh_length = time_labels[partitions[currentSession][0]] - sesh_start + props.recent_tracks[partitions[currentSession][0]].track.duration_ms;
-    sesh_length = `${(sesh_length >= 3600000) ? (Math.floor((sesh_length/60000)/60)+'h ') : ''}${Math.round((sesh_length/60000)%60)} min`
-    let sesh_day = sesh_start.toDateString().slice(4,11);
-    let sesh_time_h = sesh_start.getHours();
-    let sesh_time_m = sesh_start.getMinutes();
-    if (sesh_time_m === 60) {
-      sesh_time_h += 1;
-      sesh_time_m = 0;
-    }
-    sesh_time_m = (sesh_time_m > 9)? sesh_time_m : `0${sesh_time_m}`;
-    let sesh_time = `${(sesh_time_h%12 === 0)? '12': (sesh_time_h%12)}:${sesh_time_m} ${((Math.floor(sesh_time_h/12) % 2) ? 'PM' : 'AM')}`;
+    const avgPositivity = session_tracks.reduce((sum, track) => sum + track.valence, 0) / session_tracks.length;
+    const avgEnergy = session_tracks.reduce((sum, track) => sum + track.energy, 0) / session_tracks.length;
+    const avgDanceability = session_tracks.reduce((sum, track) => sum + track.danceability, 0) / session_tracks.length;
+
     return (
       <MDBCard color="black">
         <MDBCardHeader className="chart-nav">
-          <MDBCardTitle>Session Chart</MDBCardTitle>
+          <MDBCardTitle>Chart</MDBCardTitle>
           <MDBRow>
             <MDBCol size="4">
               <button
@@ -91,6 +101,10 @@ const JourneyStats = props => {
         </MDBCardHeader>
         <MDBCardBody>
           <span className="session-title"><b>{sesh_length}</b> session on <b>{sesh_day}</b> at <b>{sesh_time}</b></span>
+          <p>Avg Positivity: {avgPositivity}</p>
+          <p>Avg Energy: {avgEnergy}</p>
+          <p>Avg Danceability: {avgDanceability}</p>
+          <PieChart />
           <span className="session-control">
               <button
               className="session-control-button prev-button" 
@@ -106,40 +120,15 @@ const JourneyStats = props => {
               </button>
           </span>
           <div className="w-100">
-            {(currentChartType === 0) && (
-            <TrackChart tracks = {props.recent_tracks}
+            <TrackChart tracks = {recent_tracks}
                         images = {images}
-                        chart_id = {"energyChart"}
-                        feature_data = {energy_data}
+                        chart_id = {"journeyChart"}
+                        feature_data = {chartTypeData[currentChartType]}
                         x_data = {time_labels}
-                        feature_label = {"Energy"}
-                        line_color = {"#B91D82"}
+                        feature_label = {chartTypeNames[currentChartType]}
+                        line_color = {chartTypeColors[currentChartType]}
                         current_slice = {partitions[currentSession]}
             />
-            )}
-
-            {(currentChartType === 1) && (
-            <TrackChart tracks = {props.recent_tracks}
-                        images = {images}
-                        chart_id = {"valenceChart"}
-                        feature_data = {valence_data}
-                        x_data = {time_labels}
-                        feature_label = {"Positivity"}
-                        line_color = {"#1DB954"}
-                        current_slice = {partitions[currentSession]}
-            />
-            )}
-            {(currentChartType === 2) && (
-            <TrackChart tracks = {props.recent_tracks}
-                        images = {images}
-                        chart_id = {"danceabilityChart"}
-                        feature_data = {danceability_data}
-                        x_data = {time_labels}
-                        feature_label = {"Danceability"}
-                        line_color = {"#1D34B9"}
-                        current_slice = {partitions[currentSession]}
-            />
-            )}
           </div>
         </MDBCardBody>
     </MDBCard>

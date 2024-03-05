@@ -1,8 +1,6 @@
-.DS_Store
-APIExploration
-frontend/node_modules/
+# Secrets
 .env
-node_modules
-frontend/build/
-frontend/todo.txt
-.vscode/*
+
+# Build files
+build/
+node_modules/

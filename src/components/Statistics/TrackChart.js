@@ -96,8 +96,13 @@ const TrackChart = props => {
                 bounds: 'data'
             }
         });
-        
-    });
+        // Cleanup function
+        return () => {
+            if (trackChart.current) {
+            trackChart.current.destroy();
+            }
+        };
+    }, [props.feature_data]);
 
     return (
         <canvas 

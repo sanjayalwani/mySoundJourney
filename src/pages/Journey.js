@@ -5,7 +5,6 @@ import JourneyStats from '../components/Journey/JourneyStats';
 import { getJourneyData, getUsername } from '../controllers/spotifyShaper';
 import LoadingIcon from '../components/MainUI/LoadingIcon';
 import { useAuth } from '../util/auth';
-// import SpotifyWebApi from '../util/spotify-web-api';
 // import { recentTracks as DUMMY_DATA, recentTracks } from '../components/Journey/RecentTrack';
 
 const Journey = props => {

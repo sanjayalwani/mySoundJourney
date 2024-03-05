@@ -1,0 +1,102 @@
+.track-table {
+  border-spacing: 4px 0px;
+  border-collapse: separate;
+}
+
+.track-table_track_name{
+    border: none;
+}
+.track-table_track_artists{
+    color: #999;
+}
+td {
+  border-top: none !important;
+}
+th {
+  border-bottom: none !important;
+}
+
+@media only screen and (max-width: 700px){
+    .track-table_runtime{
+        display: none;
+    }
+    .track-table_time{
+        display: none;
+    }
+    
+    img{
+        width: 32px;
+        height: auto;
+    }
+    th{
+        font-size: 13px;
+    }
+    td{
+        font-size: 12px;
+    }
+}
+
+
+.track-data-square {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+  }
+  
+  .track-data-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  .track-data-triangle-middle-pad {
+    border-left: 2.5rem solid transparent;
+    border-right: 2.5rem solid transparent;
+    border-bottom: 3rem solid red;
+    top: 2rem;
+    z-index: 4;
+  }
+
+  .track-data-triangle-middle-data {
+    background-color: red;
+    top: 3rem;
+    left: 1.75rem;
+    right: 1.75rem;
+    z-index: 6;
+    text-align: center;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .track-data-triangle-left-data {
+    background-color: green;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+    padding-top: 0.8rem;
+  }
+  
+  .track-data-triangle-left-pad {
+    border-left: 2.5rem solid green;
+    border-bottom: 2.5rem solid transparent;
+    bottom: 0;
+    right: 2.5rem;
+  }
+  
+  .track-data-triangle-right-data {
+    background-color: blue;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+    padding-top: 0.8rem;
+  }
+  
+  .track-data-triangle-right-pad {
+    border-right: 2.5rem solid blue;
+    border-bottom: 2.5rem solid transparent;
+    left: 2.5rem;
+    bottom: 0;
+  }
