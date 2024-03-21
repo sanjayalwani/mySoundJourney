@@ -101,10 +101,10 @@ const JourneyStats = props => {
         </MDBCardHeader>
         <MDBCardBody>
           <span className="session-title"><b>{sesh_length}</b> session on <b>{sesh_day}</b> at <b>{sesh_time}</b></span>
-          <p>Avg Positivity: {avgPositivity}</p>
-          <p>Avg Energy: {avgEnergy}</p>
-          <p>Avg Danceability: {avgDanceability}</p>
-          <PieChart />
+          <p>Avg Positivity: {avgPositivity.toFixed(2)}</p>
+          <p>Avg Energy: {avgEnergy.toFixed(2)}</p>
+          <p>Avg Danceability: {avgDanceability.toFixed(2)}</p>
+
           <span className="session-control">
               <button
               className="session-control-button prev-button" 
